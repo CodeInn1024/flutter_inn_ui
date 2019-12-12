@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
- * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 17:58:41
+ * @LastEditors: hwd
+ * @LastEditTime: 2019-12-12 14:57:23
 */
 
 import 'package:lqrui/common/common.dart';
@@ -20,10 +20,14 @@ List<HomeRouter> basicsLists = [
   HomeRouter(name: "折叠面板", router: BasicsRoute.basicsCollapse),
 ];
 
+List<HomeRouter> basicsLists2 = [
+  HomeRouter(name: "Popup弹出层", router: BasicsRoute.basicsPopup),
+];
+
 List<HomeClass> homeList = [
-  HomeClass(name: '基础组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
+  HomeClass(name: '基础组件', icon: LqrIcon(icon: LqrIconType.radioOn), childrenList: basicsLists),
   HomeClass(name: '表单组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
-  HomeClass(name: '反馈组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
+  HomeClass(name: '反馈组件', icon: LqrIcon(icon: LqrIconType.radioOn), childrenList: basicsLists2),
   HomeClass(name: '展示组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
   HomeClass(name: '导航组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
   HomeClass(name: '业务组件', icon: LqrIcon(icon: LqrIconType.radioOn)),
@@ -59,7 +63,7 @@ class Basics extends StatelessWidget {
               ),
             ),
             Container(
-              margin: LqrEdge.edgeLR(size: 64),
+              margin: LqrEdge.edgeLR(size: 32),
               padding: LqrEdge.edgeTB(size: 20),
               child: Column(
                 children: <Widget>[
@@ -83,7 +87,6 @@ class Basics extends StatelessWidget {
               children: homeList
                   .map(
                     (v) => Container(
-                      margin: LqrEdge.edgeLR(size: 40),
                       decoration: BoxDecoration(
                         boxShadow: LqrShadow.boxShadow,
                       ),
@@ -95,26 +98,24 @@ class Basics extends StatelessWidget {
                           marginLR: 32,
                           titleStyle: TextStyle(fontSize: Lqr.ui.size(32)),
                           childrenAlignment: CrossAxisAlignment.start,
-                          children: v.name == '基础组件'
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: basicsLists
-                                      .map(
-                                        (v) => InkWell(
-                                          onTap: () => lqrRouter132(v.router),
-                                          child: Container(
-                                            color: Colors.white,
-                                            padding: LqrEdge.edgeH(top: 20, bottom: 20, left: 32, right: 32),
-                                            width: Lqr.ui.width(0.1),
-                                            child: Row(
-                                              children: <Widget>[Expanded(child: Text(v.name)), LqrIcon(icon: LqrIconType.arrowUp)],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
+                          children:  v.childrenList != null ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: v.childrenList
+                                .map(
+                                  (v) => InkWell(
+                                    onTap: () => lqrRouter132(v.router),
+                                    child: Container(
+                                      color: Colors.white,
+                                      padding: LqrEdge.edgeH(top: 20, bottom: 20, left: 32, right: 32),
+                                      width: Lqr.ui.width(0.1),
+                                      child: Row(
+                                        children: <Widget>[Expanded(child: Text(v.name)), LqrIcon(icon: Icons.navigate_next,size: 32)],
+                                      ),
+                                    ),
+                                  ),
                                 )
-                              : Container(),
+                                .toList(),
+                          ) : Container(),
                         ),
                       ),
                     ),
@@ -148,5 +149,6 @@ class Basics extends StatelessWidget {
 class HomeClass {
   final String name;
   final LqrIcon icon;
-  HomeClass({this.name, this.icon});
+  final List<HomeRouter> childrenList;
+  HomeClass({this.name, this.icon, this.childrenList});
 }
