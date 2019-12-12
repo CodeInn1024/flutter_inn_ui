@@ -66,7 +66,7 @@ class LqrInput extends StatelessWidget {
     this.type = 1,
     this.title,
     this.textAlign = TextAlign.start,
-    this.theme = LqrInputType.dark,
+    this.theme = LqrInputType.bright,
   }) : super(key: key);
 
   @override

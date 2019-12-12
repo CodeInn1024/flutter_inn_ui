@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-11-21 11:48:54
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 14:54:48
+ * @LastEditTime: 2019-12-12 11:04:58
 */
 
 export 'dart:async';
@@ -34,7 +34,6 @@ export 'package:multi_image_picker/multi_image_picker.dart';
 export 'package:package_info/package_info.dart';
 
 // widget
-export './ui/lqr_tree/lqr_tree.dart';
 export './ui/lqr_select_style/lqr_select_style.dart';
 export './ui/lqr_card/lqr_card.dart';
 export './ui/lqr_future_builder/lqr_future_builder.dart';

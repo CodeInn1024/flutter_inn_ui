@@ -1,3 +1,12 @@
+/*
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: lqrui.cn
+ * @Date: 2019-12-09 15:02:42
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2019-12-10 16:41:51
+*/
+
 class LqrTreeModel {
   List<LqrTreeListsModel> lists;
 
@@ -22,17 +31,47 @@ class LqrTreeModel {
 }
 
 class LqrTreeListsModel {
+  /// [名字]
   String name;
+
+  /// [内容]
   String value;
+
+  /// [是否可选]
   bool enabled;
+
+  /// [是否选中]
   bool isSelect;
+
+  /// [是否展开]
   bool isShow;
+
+  /// [信息]
   Map<String, dynamic> info;
+
+  /// [key]
   int key;
+
+  /// [子元素]
   List<LqrTreeListsModel> children = [];
+
+  /// [同级选择元素]
   List<LqrTreeListsModel> lists = [];
 
-  LqrTreeListsModel({this.name = '', this.value = '', this.children, this.enabled, this.isShow, this.info, this.key, this.lists});
+  /// [父元素]
+  List<TreeParent> parent = [];
+
+  LqrTreeListsModel({
+    this.name = '',
+    this.value = '',
+    this.children,
+    this.enabled,
+    this.isShow,
+    this.info,
+    this.key,
+    this.lists,
+    this.parent,
+  });
 
   LqrTreeListsModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -73,4 +112,11 @@ class LqrTreeListsModel {
     }
     return data;
   }
+}
+
+/// [父级数据]
+class TreeParent {
+  String name;
+  String value;
+  TreeParent({this.name, this.value});
 }

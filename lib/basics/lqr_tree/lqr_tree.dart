@@ -1,16 +1,27 @@
-import 'package:flutter_lqrui/basics/common.dart';
 import 'package:flutter_lqrui/lqr_common.dart';
-export './lqr_tree_model.dart';
-
-// 如果level存在，就不会受select控制
 
 class LqrTree extends StatefulWidget {
+  /// [数据]
   final List<LqrTreeListsModel> lists;
-  final bool Function(LqrTreeListsModel, String) filter; // 过滤
-  final bool isMultiple; // 是否可多选
-  final bool expandAll; // 是否展开所有节点
-  final List<String> checkedValue; // 选中的value数组
-  final int level; // 多少层
+
+  /// [过滤]
+  final bool Function(LqrTreeListsModel, String) filter;
+
+  /// [是否可多选]
+  final bool isMultiple;
+
+  /// [是否展开所有节点]
+  final bool expandAll;
+
+  /// [回显的id，选中的value数组]
+  final List<String> checkedValue;
+
+  /// [显示最大层数]
+  final int level;
+
+  /// [选项分隔符]
+  final String separator;
+
   final String searchHintText; // 搜索提示
   final int checkIndex; // 层级选择
 
@@ -24,6 +35,7 @@ class LqrTree extends StatefulWidget {
     this.checkedValue,
     this.searchHintText = "输入关键字搜索",
     this.checkIndex,
+    this.separator = ' / ',
   }) : super(key: key);
 
   @override
@@ -40,32 +52,39 @@ class _LqrTreeState extends State<LqrTree> {
   void initState() {
     super.initState();
     _lists = LqrTreeModel.fromJson(LqrTreeModel(lists: widget.lists).toJson()).lists;
-    traversal(_lists, 1);
+    traversal(_lists, 1, []);
   }
 
-  void traversal(obj, level) {
+  void traversal(List<LqrTreeListsModel> obj, int level, List<TreeParent> parent) {
     for (LqrTreeListsModel item in obj) {
-      // 是否全部展开
+      /// [是否全部展开]
       if (widget.expandAll) item.isShow = true;
-      // 反选
-      var aList = List<LqrTreeListsModel>();
-      aList.addAll(item.lists);
-      aList.add(item);
+
+      /// [反选]
+      List<LqrTreeListsModel> aList = [...item.lists, item];
       aList.forEach((v) {
         _key++;
         v.key = _key;
+
+        /// [添加父元素]
+        v.parent = [...parent, TreeParent(name: v.name, value: v.value)];
         if (level == widget.checkIndex) v.enabled = true;
         if (widget.checkedValue.indexOf(v.value) != -1) {
           v.isSelect = true;
           widget.isMultiple ? _checkedDatas[_key] = v : _checkedDatas[0] = v;
         }
       });
-      // 层级处理
+
+      /// [最大层级处理]
       if (level >= widget.level) {
         item.children = [];
         continue;
       }
-      if (item.children.length > 0) traversal(item.children, level + 1);
+
+      /// [遍历下级]
+      if (item.children.length > 0) {
+        traversal(item.children, level + 1, item.parent);
+      }
     }
   }
 
@@ -75,12 +94,7 @@ class _LqrTreeState extends State<LqrTree> {
       appBar: LqrAppBar(
         title: '转派',
         actions: <Widget>[
-          LqrButton(
-            title: '确认',
-            onTap: confirm,
-            size: LqrButtonSize.mini,
-            margin: LqrEdge.edgeH(size: 20),
-          )
+          LqrButton(title: '确认', onTap: confirm, size: LqrButtonSize.mini, margin: LqrEdge.edgeH(size: 20)),
         ],
       ),
       body: Column(
@@ -151,6 +165,7 @@ class _LqrTreeState extends State<LqrTree> {
     );
   }
 
+  /// [显示类型]
   Widget statusType(LqrTreeListsModel data) {
     List<Widget> lists = [];
     if (data.children.length == 0 || data.enabled) {
@@ -170,14 +185,16 @@ class _LqrTreeState extends State<LqrTree> {
     );
   }
 
-  bool filter(data, val) {
+  /// [过滤]
+  bool filter(LqrTreeListsModel data, val) {
     if (widget.filter == null)
       return data.name.contains(val);
     else
       return widget.filter(data, val);
   }
 
-  void onTap(data, type) {
+  /// [点击]
+  void onTap(LqrTreeListsModel data, type) {
     setState(() {
       switch (type) {
         case true:
@@ -196,19 +213,17 @@ class _LqrTreeState extends State<LqrTree> {
     });
   }
 
+  /// [回调]
   void confirm() {
-    LqrTreeClaabackData a = LqrTreeClaabackData();
-    a.checkedKeys = _checkedDatas.keys.toList();
-    a.checkedValue = _checkedDatas.values.map((v) => v.value).toList();
-    a.checkedMap = _checkedDatas;
-    a.checkedLists = _checkedDatas.values.toList();
-    Navigator.pop(context, a);
+    LqrTreeCalckback _a = LqrTreeCalckback();
+    _a.checkedMap = _checkedDatas;
+    _a.checkedLists = _checkedDatas.values.toList();
+    _a.value = _checkedDatas.values.map((v) => v.value).toList();
+    _a.name = _a.checkedLists.map((v) => v.name).join(widget.separator);
+    _a.parent = _a.checkedLists.map((v) => v.parent).toList();
+    _a.allLevelsName = _a.parent.map((v) => v.map((e) => e.name).join(widget.separator)).toList();
+    _a.allLevelsValue = _a.parent.map((v) => v.map((e) => e.value).toList()).toList();
+    print(_a.allLevelsName);
+    Navigator.pop(context, _a);
   }
-}
-
-class LqrTreeClaabackData {
-  List<int> checkedKeys = [];
-  List<String> checkedValue = [];
-  Map<int, LqrTreeListsModel> checkedMap = {};
-  List<LqrTreeListsModel> checkedLists = [];
 }
