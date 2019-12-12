@@ -1,0 +1,29 @@
+name: lqrui
+description: Demonstrates how to use the flutter_lqrui plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lqrui:
+    path: ../
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/icons/
+    
+    - assets/images/
+  fonts:
+    - family: LqrIcon
+      fonts:
+        - asset: assets/icons/lqr_iconfont.ttf
