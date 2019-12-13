@@ -22,6 +22,7 @@ List<HomeRouter> basicsLists = [
 
 List<HomeRouter> basicsLists2 = [
   HomeRouter(name: "Popup弹出层", router: BasicsRoute.basicsPopup),
+  HomeRouter(name: "Dialog弹出框", router: BasicsRoute.basicsDialog),
 ];
 
 List<HomeClass> homeList = [

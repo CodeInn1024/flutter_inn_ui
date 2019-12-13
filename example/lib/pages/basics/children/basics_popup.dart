@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-12 11:28:18
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-12 18:00:16
+ * @LastEditTime: 2019-12-13 17:19:41
 */
 import 'package:lqrui/common/common.dart';
 
@@ -23,73 +23,96 @@ class _BasicsPopupState extends State<BasicsPopup> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            padding: LqrEdge.edgeA(size: 32),
-            child: Text('基础用法', style: TextStyle(color: LqrText.color3)),
-          ),
+          LqrCell(title: "基础用法", left: LqrCellWidget.origin, background: null),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(),
-            child: Container(              
-            padding: LqrEdge.edgeH(tb: 20, lr: 32),
-            color: Colors.white,
+            onTap: () => LqrPopup.openPopup(
+              container: Container(
+                width: 100.0,
+                height: 100.0,
+                color: Colors.white,
+              ),
+            ),
+            child: Container(
+              padding: LqrEdge.edgeH(tb: 20, lr: 32),
+              color: Colors.white,
               child: Row(
-                children: <Widget>[Expanded(child: Text('展示弹出层')),LqrIcon(icon: Icons.navigate_next,size: 32)],
+                children: <Widget>[Expanded(child: Text('展示弹出层')), LqrIcon(icon: Icons.navigate_next, size: 32)],
               ),
             ),
           ),
-          Container(
-            padding: LqrEdge.edgeA(size: 32),
-            child: Text('弹出位置', style: TextStyle(color: LqrText.color3)),
-          ),
+          LqrCell(title: "弹出位置", left: LqrCellWidget.origin, background: null),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(position: Alignment.centerLeft),
-            child: Container(              
-            padding: LqrEdge.edgeH(tb: 20, lr: 32),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: LqrBorder.border(bottom: 1)
-            ),
-              child: Row(
-                children: <Widget>[Expanded(child: Text('左侧弹出')),LqrIcon(icon: Icons.navigate_next,size: 32)],
+            onTap: () => LqrPopup.openPopup(
+              container: Container(
+                width: 100.0,
+                height: 100.0,
+                color: Colors.white,
               ),
+              position: Alignment.centerLeft,
+              transitionType: LqrPopupType.offsetLeft,
             ),
-          ),
-          GestureDetector(
-            onTap: () => LqrPopup.openPopup(position: Alignment.centerRight,barrierColor:  Colors.black.withOpacity(0)),
-            child: Container(              
-            padding: LqrEdge.edgeH(tb: 20, lr: 32),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: LqrBorder.border(bottom: 1)
-            ),
+            child: Container(
+              padding: LqrEdge.edgeH(tb: 20, lr: 32),
+              decoration: BoxDecoration(color: Colors.white, border: LqrBorder.border(bottom: 1)),
               child: Row(
-                children: <Widget>[Expanded(child: Text('右侧弹出')),LqrIcon(icon: Icons.navigate_next,size: 32)],
+                children: <Widget>[Expanded(child: Text('左侧弹出')), LqrIcon(icon: Icons.navigate_next, size: 32)],
               ),
             ),
           ),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(position: Alignment.topCenter),
-            child: Container(              
-            padding: LqrEdge.edgeH(tb: 20, lr: 32),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: LqrBorder.border(bottom: 1)
+            onTap: () => LqrPopup.openPopup(
+              container: Container(
+                width: 100.0,
+                height: 100.0,
+                color: Colors.white,
+              ),
+              position: Alignment.centerRight,
+              transitionType: LqrPopupType.offsetRight,
             ),
+            child: Container(
+              padding: LqrEdge.edgeH(tb: 20, lr: 32),
+              decoration: BoxDecoration(color: Colors.white, border: LqrBorder.border(bottom: 1)),
               child: Row(
-                children: <Widget>[Expanded(child: Text('顶部弹出')),LqrIcon(icon: Icons.navigate_next,size: 32)],
+                children: <Widget>[
+                  Expanded(child: Text('右侧弹出')),
+                  LqrIcon(icon: Icons.navigate_next, size: 32),
+                ],
               ),
             ),
           ),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(position: Alignment.bottomCenter),
-            child: Container(              
-            padding: LqrEdge.edgeH(tb: 20, lr: 32),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: LqrBorder.border(bottom: 1)
+            onTap: () => LqrPopup.openPopup(
+              container: Container(
+                width: 100.0,
+                height: 100.0,
+                color: Colors.white,
+              ),
+              position: Alignment.topCenter,
+              transitionType: LqrPopupType.offsetTop,
             ),
+            child: Container(
+              padding: LqrEdge.edgeH(tb: 20, lr: 32),
+              decoration: BoxDecoration(color: Colors.white, border: LqrBorder.border(bottom: 1)),
               child: Row(
-                children: <Widget>[Expanded(child: Text('底部弹出')),LqrIcon(icon: Icons.navigate_next,size: 32)],
+                children: <Widget>[Expanded(child: Text('顶部弹出')), LqrIcon(icon: Icons.navigate_next, size: 32)],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => LqrPopup.openPopup(
+              container: Container(
+                width: 100.0,
+                height: 100.0,
+                color: Colors.white,
+              ),
+              position: Alignment.bottomCenter,
+              transitionType: LqrPopupType.offsetBottom,
+            ),
+            child: Container(
+              padding: LqrEdge.edgeH(tb: 20, lr: 32),
+              decoration: BoxDecoration(color: Colors.white, border: LqrBorder.border(bottom: 1)),
+              child: Row(
+                children: <Widget>[Expanded(child: Text('底部弹出')), LqrIcon(icon: Icons.navigate_next, size: 32)],
               ),
             ),
           ),
