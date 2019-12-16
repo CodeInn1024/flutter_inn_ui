@@ -58,7 +58,7 @@ export './dialog/link_picker_dialog/link_picker_dialog.dart';
 
 // provider
 export './store/index.dart';
-export './router/index.dart';
+export './router/common.dart';
 
 export './basics/common.dart';
 export './untils/common.dart';

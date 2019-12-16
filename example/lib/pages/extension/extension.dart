@@ -11,10 +11,10 @@ import 'package:lqrui/common/common.dart';
 class Extension extends StatelessWidget {
   Extension({Key key}) : super(key: key);
 
-  final List<HomeRouter> lists = [
-    HomeRouter(name: "横排多组排列", router: ExtensionRoute.extensionLineText),
-    HomeRouter(name: "下拉刷新上拉加载", router: ExtensionRoute.extensionRefresh),
-    HomeRouter(name: "路由", router: ExtensionRoute.extensionRouter),
+  final List<LqrRouterClass> lists = [
+    ExtensionRoute.lineText,
+    ExtensionRoute.refres,
+    ExtensionRoute.router,
   ];
 
   @override
@@ -26,11 +26,12 @@ class Extension extends StatelessWidget {
         itemCount: lists.length,
         itemBuilder: (BuildContext context, int i) {
           return LqrCell(
-            title: lists[i].name,
+            title: lists[i].title,
             onTap: () {
               // Navigator.pushNamed(context, '/extensionLineText',ExtensionLineText(id));
               // APPRoute.pushExtensionLineText("13213132");
               // lqrRouter132(lists[i].router);
+              LqrRouter.push(lists[i]);
             },
             margin: LqrEdge.edgeT(),
             background: LqrColor.blue,

@@ -30,7 +30,7 @@ class ExtensionRouter extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           LqrRouterClass v = routers[i];
           return GestureDetector(
-            onTap: () => lqrRouter(v),
+            onTap: () => LqrRouter.push(v),
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class ExtensionRouter extends StatelessWidget {
               ),
               child: DefaultTextStyle(
                 style: TextStyle(fontSize: LqrText.size32, color: Colors.white),
-                child: Text(v.name),
+                // child: Text(v.name),
               ),
             ),
           );
@@ -51,7 +51,7 @@ class ExtensionRouter extends StatelessWidget {
 }
 
 List<LqrRouterClass> routers = [
-  LqrRouterClass(NewPage(title: '基础用法'), name: '基础用法'),
+  // LqrRouterClass(NewPage(title: '基础用法'), name: '基础用法'),
 ];
 
 class NewPage extends StatelessWidget {

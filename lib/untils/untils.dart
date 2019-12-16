@@ -38,9 +38,10 @@ class LqrUntils {
   }
 
   /// [打印]
-  static String printStr(String value) => """
+  static String printStr(String value, [List val]) => """
   \n════════════════════════╡ Flutter Lqr UI ╞═════════════════════════════════════
   \n══╡ +++ $value +++ ╞════
+  ${val.map((v) => '\n══╡ +++ $v +++ ╞════').toList().join("")}
   """;
 
   /// shijan
@@ -49,11 +50,11 @@ class LqrUntils {
     int _milliseconds;
     switch (_value[1]) {
       case 'h':
-        _milliseconds = int.parse(decimalMtp([_value[0], '3600000']).toString()) ;
+        _milliseconds = int.parse(decimalMtp([_value[0], '3600000']).toString());
         break;
       case 'm':
         _milliseconds = int.parse(decimalMtp([_value[0], '60000']).toString());
-    print(_milliseconds);
+        print(_milliseconds);
         break;
       case 's':
         _milliseconds = int.parse(decimalMtp([_value[0], '1000']).toString());

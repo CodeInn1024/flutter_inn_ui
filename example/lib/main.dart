@@ -24,8 +24,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xfff0f2f5),
       ),
+      navigatorKey: LqrRouter.navKey,
       home: LqrBackDesktop(
         builder: (scaffoldCtx) {
+          LqrRouter.defaultType = LqrRouterType.material;
           Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx, primaryColor: LqrColor.red)..init(scaffoldCtx);
           LqrAppBarTheme.ui = LqrAppBarTheme(gradient: LqrGradient.linear45(LqrColor.redG), textColor: Colors.white);
           LqrButtonTheme.ui = LqrButtonTheme(type: LqrButtonType.redGradient);
