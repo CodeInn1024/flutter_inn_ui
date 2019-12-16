@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-12 14:57:23
+ * @LastEditTime: 2019-12-16 11:57:47
 */
 
 import 'package:lqrui/common/common.dart';
@@ -23,6 +23,7 @@ List<HomeRouter> basicsLists = [
 List<HomeRouter> basicsLists2 = [
   HomeRouter(name: "Popup弹出层", router: BasicsRoute.basicsPopup),
   HomeRouter(name: "Dialog弹出框", router: BasicsRoute.basicsDialog),
+  HomeRouter(name: "Notify消息提示", router: BasicsRoute.basicsNotify),
 ];
 
 List<HomeClass> homeList = [
