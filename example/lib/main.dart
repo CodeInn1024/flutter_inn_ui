@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 11:40:15
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 14:37:24
+ * @LastEditTime: 2019-12-16 10:17:44
 */
 
 import './common/common.dart';
@@ -26,12 +26,14 @@ class MyApp extends StatelessWidget {
       ),
       home: LqrBackDesktop(
         builder: (scaffoldCtx) {
-          Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx,primaryColor: LqrColor.red)..init(scaffoldCtx);
+          Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx, primaryColor: LqrColor.red)..init(scaffoldCtx);
           LqrAppBarTheme.ui = LqrAppBarTheme(gradient: LqrGradient.linear45(LqrColor.redG), textColor: Colors.white);
           LqrButtonTheme.ui = LqrButtonTheme(type: LqrButtonType.redGradient);
           return Store.value<IndexStore>(context).showSplash ? SplashPage() : Store.value<IndexStore>(context).token == '0' ? UserLogin() : HomePage();
         },
       ),
+      // routes: APPRoute.routes,
+      // onGenerateRoute: APPRoute.onGenerateRoute,
     );
   }
 }

@@ -4,17 +4,19 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-09 15:38:04
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 16:04:12
+ * @LastEditTime: 2019-12-16 09:02:37
 */
 import 'package:lqrui/common/common.dart';
 
 class ExtensionLineText extends StatelessWidget {
-  const ExtensionLineText({Key key}) : super(key: key);
+  final String id;
+  final String title;
+  const ExtensionLineText({Key key, this.id, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LqrAppBar(title: "横排多组排列"),
+      appBar: LqrAppBar(title: "横排多组排列$id"),
       body: Container(
         padding: LqrEdge.edgeA(),
         child: Column(

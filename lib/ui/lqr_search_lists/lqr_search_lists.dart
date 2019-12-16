@@ -4,17 +4,29 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 12:44:29
+ * @LastEditTime: 2019-12-16 18:41:22
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
 
 class LqrSearchLists extends StatefulWidget {
+  /// [内容widget]
   final Widget childItem;
+
+  /// [搜索widget]
   final Widget searchWidget;
+
+  /// [Controller]
   final EasyRefreshController loadingController;
+
+  /// [标题]
   final String title;
-  final bool searchShow; //显示搜索
+
+  /// [显示搜索]
+  final bool searchShow;
+
+  /// [重置事件]
+  final Function() reset;
 
   const LqrSearchLists({
     Key key,
@@ -23,6 +35,7 @@ class LqrSearchLists extends StatefulWidget {
     this.loadingController,
     this.title = "",
     this.searchShow = false,
+    this.reset,
   }) : super(key: key);
 
   @override
@@ -61,7 +74,7 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
                   top: 0,
                   left: 0,
                   child: GestureDetector(
-                    onTap: () => setState(() => _searchShow = false),
+                    // onTap: () => setState(() => _searchShow = false),
                     child: Container(
                       width: LqrUntils.screenWidth,
                       height: LqrUntils.screenHeight,
@@ -72,7 +85,49 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
                           width: LqrUntils.screenWidth,
                           padding: LqrEdge.edgeA(),
                           decoration: BoxDecoration(boxShadow: LqrShadow.boxShadow, color: Colors.white),
-                          child: widget.searchWidget,
+                          child: Column(
+                            children: <Widget>[
+                              widget.searchWidget,
+                              Container(height: Lqr.ui.width(30)),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  LqrButton(
+                                    title: "取消",
+                                    size: LqrButtonSize.small,
+                                    plain: true,
+                                    onTap: () {
+                                      setState(() {
+                                        _searchShow = !_searchShow;
+                                      });
+                                    },
+                                  ),
+                                  Container(width: Lqr.ui.width(30)),
+                                  widget.reset == null
+                                      ? Container()
+                                      : LqrButton(
+                                          title: "重置",
+                                          size: LqrButtonSize.small,
+                                          theme: LqrButtonTheme(type: LqrButtonType.danger),
+                                          onTap: widget.reset,
+                                        ),
+                                  Container(width: Lqr.ui.width(30)),
+                                  LqrButton(
+                                    title: "搜索",
+                                    size: LqrButtonSize.small,
+                                    theme: LqrButtonTheme(type: LqrButtonType.primary),
+                                    onTap: () {
+                                      setState(() {
+                                        _searchShow = !_searchShow;
+                                      });
+                                      widget.loadingController.callRefresh();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

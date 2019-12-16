@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-11 15:00:49
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 16:10:43
+ * @LastEditTime: 2019-12-16 10:18:26
 */
 
 import 'package:lqrui/common/common.dart';
@@ -69,7 +69,7 @@ class NewPage extends StatelessWidget {
           // print( route.settings);
           // print(route.willHandlePopInternally);
           // LqrRouter.pushAndRemoveUntil(ExtensionRouter());
-          Navigator.popUntil(context, ModalRoute.withName('/screen2'));
+          // Navigator.popUntil(context, ModalRoute.withName('/screen2'));
         },
       ),
     );

@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-09 15:24:04
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 15:14:44
+ * @LastEditTime: 2019-12-16 10:08:50
 */
 import 'package:lqrui/common/common.dart';
 
@@ -27,7 +27,11 @@ class Extension extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return LqrCell(
             title: lists[i].name,
-            onTap: () => lqrRouter132(lists[i].router),
+            onTap: () {
+              // Navigator.pushNamed(context, '/extensionLineText',ExtensionLineText(id));
+              // APPRoute.pushExtensionLineText("13213132");
+              // lqrRouter132(lists[i].router);
+            },
             margin: LqrEdge.edgeT(),
             background: LqrColor.blue,
             titleColor: Colors.white,

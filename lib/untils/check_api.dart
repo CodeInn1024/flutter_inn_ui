@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-10 14:39:43
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-12 17:11:46
+ * @LastEditTime: 2019-12-16 18:41:39
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -29,7 +29,7 @@ void checkApi(Map<String, LqrApiConfig> apiConfig, Function(String url) onTap) {
               padding: LqrEdge.edgeA(),
               child: Row(
                 children: <Widget>[
-                  Expanded(child: LqrInput(controller: _controller, background: Colors.grey[200], contentPadding: LqrEdge.edgeLR())),
+                  Expanded(child: LqrInput(controller: _controller, theme: LqrInputType.dark)),
                   Container(width: Lqr.ui.width(20)),
                   LqrButton(title: '确定', size: LqrButtonSize.small, theme: LqrButtonTheme(type: LqrButtonType.primary), onTap: () => onTap(_controller.text)),
                 ],

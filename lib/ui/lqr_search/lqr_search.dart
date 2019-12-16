@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-11-21 11:48:54
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-05 12:14:48
+ * @LastEditTime: 2019-12-16 18:41:02
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -29,12 +29,11 @@ class LqrSearch extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: LqrInput(
-            height: 60,
             hintText: hintText,
-            background: Colors.grey[200],
             circle: circle,
-            contentPadding: LqrEdge.edgeLR(),
+            size: LqrInputSize.mini,
             onChanged: onChanged,
+            theme: LqrInputType.dark,
           ),
         ),
         onTap == null

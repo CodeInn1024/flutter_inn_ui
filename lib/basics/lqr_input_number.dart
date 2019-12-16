@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-09 10:05:40
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 14:59:18
+ * @LastEditTime: 2019-12-16 18:42:20
 */
 
 
@@ -86,10 +86,10 @@ class _LqrInputNumberState extends State<LqrInputNumber> {
           btn('reduce'),
           Expanded(
             child: LqrInput(
-              background: Colors.black38,
+              // background: Colors.black38,
               controller: _value,
               round: 0,
-              height: widget.size.btnSize,
+              // height: widget.size.btnSize,
               width: widget.size.inputSize,
               textAlign: TextAlign.center,
               theme: LqrInputType.bright,
