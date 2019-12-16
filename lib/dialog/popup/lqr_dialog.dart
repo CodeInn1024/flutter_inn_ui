@@ -4,32 +4,32 @@
  * @Autor: hwd
  * @Date: 2019-12-13 15:54:01
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-16 12:04:55
+ * @LastEditTime: 2019-12-16 18:39:19
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
 class LqrDialog {
-  /// [closePopup]: 是否在点击遮罩层后关闭
+  /// closePopup: 是否在点击遮罩层后关闭
   ///
-  /// [title]: 标题
+  /// title: 标题
   ///
-  /// [showTitle]: 是否显示标题
+  /// showTitle: 是否显示标题
   ///
-  /// [titleWidget]: 自定义标题栏
+  /// titleWidget: 自定义标题栏
   ///
-  /// [message]: 内容
+  /// message: 内容
   ///
-  /// [messageWidget]: 自定义内容栏
+  /// messageWidget: 自定义内容栏
   ///
-  /// [radios]: 圆角大小
+  /// radios: 圆角大小
   ///
-  /// [width]: 弹窗宽度
+  /// width: 弹窗宽度
   ///
-  /// [showConfirmButton]: 是否显示确认按钮
+  /// showConfirmButton: 是否显示确认按钮
   ///
-  /// [showCancelButton]: 是否显示取消按钮
+  /// showCancelButton: 是否显示取消按钮
   ///
-  /// [confirmFun]: 确认回调函数
+  /// confirmFun: 确认回调函数
   static openDialog({
     bool closePopup = true,
     String title = '标题',
@@ -111,21 +111,56 @@ class LqrDialog {
     );
   }
 
-  static openNotify(){
+  /// child: 自定义内容widget
+  ///
+  /// message: 内容
+  ///
+  /// backgroundColor: 背景色(与type同时使用时，优先使用)
+  ///
+  /// type: 类型,可选值为: primary danger warning 默认: success
+  ///
+  /// duration: 展示时长(单位: 秒(s)) 默认: 2s
+  static openNotify({
+    Widget child,
+    String message = '我是内容...',
+    Color backgroundColor,
+    String type = 'success',
+    int duration = 2,
+  }) {
+    if (backgroundColor == null) backgroundColor = NotifyType.type(type);    
     return LqrPopup.openPopup(
       container: Container(
         width: Lqr().width(0.1),
         padding: LqrEdge.edgeA(),
-        color: Colors.white,
-        child: Text('data')
+        color: backgroundColor,
+        child: child ?? Text(message, style: TextStyle(color: Colors.white), textAlign: TextAlign.center),
       ),
       position: Alignment.topCenter,
       transitionType: LqrPopupType.offsetTop,
+      overlay: false,
+      duration: duration,
     );
   }
 }
 
-
-class LqrThemeStyle {
-  
+class NotifyType {
+  static type(t) {
+    switch (t) {
+      case 'danger':
+        return Colors.red;
+        break;
+      case 'primary':
+        return Colors.blue;
+        break;
+      case 'success':
+        return Colors.green;
+        break;
+      case 'warning':
+        return Color(0xFFff976a);
+        break;
+      default:
+        throw FormatException(LqrUntils.printStr('参数错误！'));
+        break;
+    }
+  }
 }

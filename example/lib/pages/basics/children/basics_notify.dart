@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-16 11:53:52
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-16 12:00:25
+ * @LastEditTime: 2019-12-16 18:40:27
 */
 import 'package:lqrui/common/common.dart';
 
@@ -28,22 +28,22 @@ class _BasicsNotifyState extends State<BasicsNotify> {
                 title: '基础用法',
                 onTap: () => LqrDialog.openNotify(),
                 size: LqrButtonSize.medium,
-                margin: LqrEdge.edgeL(size: 20),
+                margin: LqrEdge.edgeL(),
               ),
           LqrCell(title: "通知类型", left: LqrCellWidget.origin, background: null),
           Row(
             children: <Widget>[
               LqrButton(
                 title: '主要通知',
-                onTap: () => LqrDialog.openDialog(),
+                onTap: () => LqrDialog.openNotify(type: 'primary'),
                 size: LqrButtonSize.medium,
-                margin: LqrEdge.edgeL(size: 20),
+                margin: LqrEdge.edgeL(),
               ),
               LqrButton(
                 title: '危险通知',
-                onTap: () => LqrDialog.openDialog(showTitle: false),
+                onTap: () => LqrDialog.openNotify(type: 'danger'),
                 size: LqrButtonSize.medium,
-                margin: LqrEdge.edgeL(size: 20),
+                margin: LqrEdge.edgeL(),
               ),
             ],
           ),
