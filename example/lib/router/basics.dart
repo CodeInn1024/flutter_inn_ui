@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 08:26:46
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-13 17:05:37
+ * @LastEditTime: 2019-12-16 11:57:04
 */
 
 import 'package:lqrui/common/common.dart';
@@ -18,6 +18,7 @@ import 'package:lqrui/pages/basics/children/basics_checkbox.dart';
 import 'package:lqrui/pages/basics/children/basics_collapse.dart';
 import 'package:lqrui/pages/basics/children/basics_popup.dart';
 import 'package:lqrui/pages/basics/children/basics_dialog.dart';
+import 'package:lqrui/pages/basics/children/basics_notify.dart';
 
 class BasicsRoute {
   static Widget get  basicsButton => BasicsButton();
@@ -29,4 +30,5 @@ class BasicsRoute {
   static Widget get basicsCollapse => BasicsCollapse();
   static Widget get basicsPopup => BasicsPopup();
   static Widget get basicsDialog => BasicsDialog();
+  static Widget get basicsNotify => BasicsNotify();
 }
