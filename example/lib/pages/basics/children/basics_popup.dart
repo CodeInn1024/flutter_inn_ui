@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-12 11:28:18
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-13 17:19:41
+ * @LastEditTime: 2019-12-17 08:27:51
 */
 import 'package:lqrui/common/common.dart';
 
@@ -25,7 +25,7 @@ class _BasicsPopupState extends State<BasicsPopup> {
         children: <Widget>[
           LqrCell(title: "基础用法", left: LqrCellWidget.origin, background: null),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(
+            onTap: () => openPopup(
               container: Container(
                 width: 100.0,
                 height: 100.0,
@@ -42,7 +42,7 @@ class _BasicsPopupState extends State<BasicsPopup> {
           ),
           LqrCell(title: "弹出位置", left: LqrCellWidget.origin, background: null),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(
+            onTap: () => openPopup(
               container: Container(
                 width: 100.0,
                 height: 100.0,
@@ -60,7 +60,7 @@ class _BasicsPopupState extends State<BasicsPopup> {
             ),
           ),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(
+            onTap: () => openPopup(
               container: Container(
                 width: 100.0,
                 height: 100.0,
@@ -81,7 +81,7 @@ class _BasicsPopupState extends State<BasicsPopup> {
             ),
           ),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(
+            onTap: () => openPopup(
               container: Container(
                 width: 100.0,
                 height: 100.0,
@@ -99,7 +99,7 @@ class _BasicsPopupState extends State<BasicsPopup> {
             ),
           ),
           GestureDetector(
-            onTap: () => LqrPopup.openPopup(
+            onTap: () => openPopup(
               container: Container(
                 width: 100.0,
                 height: 100.0,

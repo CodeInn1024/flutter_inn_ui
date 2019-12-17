@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-13 17:03:14
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-16 11:44:09
+ * @LastEditTime: 2019-12-17 08:31:05
 */
 import 'package:lqrui/common/common.dart';
 
@@ -34,7 +34,7 @@ class _BasicsDialogState extends State<BasicsDialog> {
               ),
               LqrButton(
                 title: '提示弹窗( 无标题 )',
-                onTap: () => LqrDialog.openDialog(showTitle: false),
+                onTap: () => LqrDialog.openDialog(),
                 size: LqrButtonSize.big,
                 margin: LqrEdge.edgeLR(size: 10),
               ),

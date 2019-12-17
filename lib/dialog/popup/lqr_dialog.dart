@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-13 15:54:01
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-16 18:39:19
+ * @LastEditTime: 2019-12-17 08:31:13
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -32,7 +32,7 @@ class LqrDialog {
   /// confirmFun: 确认回调函数
   static openDialog({
     bool closePopup = true,
-    String title = '标题',
+    String title,
     Widget titleWidget,
     String message = '我是内容...',
     Widget messageWidget,
@@ -40,10 +40,9 @@ class LqrDialog {
     double width = 600,
     bool showConfirmButton = true,
     bool showCancelButton = false,
-    bool showTitle = true,
     Function confirmFun,
   }) {
-    return LqrPopup.openPopup(
+    return openPopup(
       container: ClipRRect(
         borderRadius: LqrBorder.radius(size: radios),
         child: Container(
@@ -53,12 +52,11 @@ class LqrDialog {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              showTitle
-                  ? titleWidget ??
-                      Container(
-                        padding: LqrEdge.edgeH(lr: 20, top: 20),
-                        child: Text(title, style: TextStyle(fontSize: Lqr.ui.size(36))),
-                      )
+              titleWidget ?? title != null
+                  ? Container(
+                      padding: LqrEdge.edgeH(lr: 20, top: 20),
+                      child: Text(title, style: TextStyle(fontSize: Lqr.ui.size(36))),
+                    )
                   : Container(),
               messageWidget ?? Container(padding: LqrEdge.edgeH(lr: 20, top: 20), child: Text(message)),
               Container(
@@ -127,8 +125,8 @@ class LqrDialog {
     String type = 'success',
     int duration = 2,
   }) {
-    if (backgroundColor == null) backgroundColor = NotifyType.type(type);    
-    return LqrPopup.openPopup(
+    if (backgroundColor == null) backgroundColor = setType(type);
+    return openPopup(
       container: Container(
         width: Lqr().width(0.1),
         padding: LqrEdge.edgeA(),
@@ -143,24 +141,22 @@ class LqrDialog {
   }
 }
 
-class NotifyType {
-  static type(t) {
-    switch (t) {
-      case 'danger':
-        return Colors.red;
-        break;
-      case 'primary':
-        return Colors.blue;
-        break;
-      case 'success':
-        return Colors.green;
-        break;
-      case 'warning':
-        return Color(0xFFff976a);
-        break;
-      default:
-        throw FormatException(LqrUntils.printStr('参数错误！'));
-        break;
-    }
+Color setType(t) {
+  switch (t) {
+    case 'danger':
+      return Colors.red;
+      break;
+    case 'primary':
+      return Colors.blue;
+      break;
+    case 'success':
+      return Colors.green;
+      break;
+    case 'warning':
+      return Color(0xFFff976a);
+      break;
+    default:
+      throw FormatException(LqrUntils.printStr('参数错误！'));
+      break;
   }
 }
