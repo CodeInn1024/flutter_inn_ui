@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-13 15:54:01
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-17 08:31:13
+ * @LastEditTime: 2019-12-17 08:40:08
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -52,7 +52,7 @@ class LqrDialog {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              titleWidget ?? title != null
+              titleWidget != null ? titleWidget : title != null
                   ? Container(
                       padding: LqrEdge.edgeH(lr: 20, top: 20),
                       child: Text(title, style: TextStyle(fontSize: Lqr.ui.size(36))),

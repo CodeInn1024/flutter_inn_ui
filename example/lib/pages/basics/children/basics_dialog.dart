@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-13 17:03:14
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-17 08:31:05
+ * @LastEditTime: 2019-12-17 08:41:43
 */
 import 'package:lqrui/common/common.dart';
 
@@ -28,7 +28,7 @@ class _BasicsDialogState extends State<BasicsDialog> {
             children: <Widget>[
               LqrButton(
                 title: '提示弹窗',
-                onTap: () => LqrDialog.openDialog(),
+                onTap: () => LqrDialog.openDialog(title: '标题'),
                 size: LqrButtonSize.medium,
                 margin: LqrEdge.edgeL(size: 20),
               ),
@@ -58,7 +58,7 @@ class _BasicsDialogState extends State<BasicsDialog> {
                 padding: LqrEdge.edgeA(size: 20),
                 child: Text('自定义标题', style: TextStyle(color: Colors.blue)),
               ),
-              messageWidget: Text('自定义内容', style: TextStyle(color: Colors.red)),
+              messageWidget: Text('自定义内容...', style: TextStyle(color: Colors.red)),
             ),
             size: LqrButtonSize.big,
             margin: LqrEdge.edgeL(size: 20),
