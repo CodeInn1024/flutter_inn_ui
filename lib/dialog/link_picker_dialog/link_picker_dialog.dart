@@ -40,13 +40,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
         int a = b.indexWhere((v) => v.value == widget.select[i].value);
         if (a != -1) {
           selectIndex.add(a);
-          tabList.add(
-            LqrTreeListsModel(
-              name: widget.select[i].name,
-              value: widget.select[i].value,
-              children: b[a].children,
-            ),
-          );
+          tabList.add(b[a]);
           b = b[a].children; //替换为子children
         }
       }
@@ -120,7 +114,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
                         ],
                       ),
                     ),
-                    LqrBorder.interval(),
+                    // Container(height: Lqr.ui.width(10)),
                     Container(
                       height: Lqr.ui.height(LqrUntils.screenHeight / 2),
                       child: ListView.builder(

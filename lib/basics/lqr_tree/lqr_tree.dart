@@ -5,7 +5,7 @@ class LqrTree extends StatefulWidget {
   final List<LqrTreeListsModel> lists;
 
   /// [过滤]
-  final bool Function(LqrTreeListsModel, String) filter;
+  final bool Function(LqrTreeListsModel) filter;
 
   /// [是否可多选]
   final bool isMultiple;
@@ -22,28 +22,31 @@ class LqrTree extends StatefulWidget {
   /// [选项分隔符]
   final String separator;
 
-  final String searchHintText; // 搜索提示
-  final int checkIndex; // 层级选择
+  /// [层级选择]
+  final int checkIndex;
+
+  /// [改变事件]
+  final Function(LqrTreeCalckback data) onChanged;
 
   const LqrTree({
     Key key,
-    this.lists,
+    @required this.lists,
     this.filter,
     this.isMultiple = false,
     this.expandAll = false,
-    this.level = 10,
-    this.checkedValue,
-    this.searchHintText = "输入关键字搜索",
+    int level = 10,
+    this.checkedValue = const [],
     this.checkIndex,
     this.separator = ' / ',
-  }) : super(key: key);
+    this.onChanged,
+  })  : level = level ?? 10,
+        super(key: key);
 
   @override
   _LqrTreeState createState() => _LqrTreeState();
 }
 
 class _LqrTreeState extends State<LqrTree> {
-  String _searchVal = '';
   List<LqrTreeListsModel> _lists = [];
   Map<int, LqrTreeListsModel> _checkedDatas = {};
   int _key = 0;
@@ -69,7 +72,7 @@ class _LqrTreeState extends State<LqrTree> {
         /// [添加父元素]
         v.parent = [...parent, TreeParent(name: v.name, value: v.value)];
         if (level == widget.checkIndex) v.enabled = true;
-        if (widget.checkedValue.indexOf(v.value) != -1) {
+        if (widget.checkedValue != null && widget.checkedValue.indexOf(v.value) != -1) {
           v.isSelect = true;
           widget.isMultiple ? _checkedDatas[_key] = v : _checkedDatas[0] = v;
         }
@@ -90,42 +93,11 @@ class _LqrTreeState extends State<LqrTree> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: LqrAppBar(
-        title: '转派',
-        actions: <Widget>[
-          LqrButton(title: '确认', onTap: confirm, size: LqrButtonSize.mini, margin: LqrEdge.edgeH(size: 20)),
-        ],
-      ),
-      body: Column(
+    return SingleChildScrollView(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: Lqr().width(100),
-            padding: LqrEdge.edgeA(),
-            decoration: BoxDecoration(color: Colors.white),
-            margin: LqrEdge.edgeB(),
-            child: LqrSearch(
-              hintText: widget.searchHintText,
-              onChanged: (val) => setState(() => _searchVal = val),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: LqrUntils.screenWidth,
-              padding: LqrEdge.edgeA(),
-              color: Colors.white,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: _lists.map((LqrTreeListsModel v) => page(v)).toList(),
-                ),
-              ),
-            ),
-          ),
-        ],
+        children: _lists.map((LqrTreeListsModel v) => page(v)).toList(),
       ),
     );
   }
@@ -133,7 +105,7 @@ class _LqrTreeState extends State<LqrTree> {
   Widget page(LqrTreeListsModel data) {
     return Column(
       children: <Widget>[
-        data.children.length > 0 || filter(data, _searchVal)
+        data.children.length > 0 || filter(data)
             ? Container(
                 height: Lqr().width(60),
                 child: GestureDetector(
@@ -180,17 +152,17 @@ class _LqrTreeState extends State<LqrTree> {
       lists.add(LqrIcon(icon: icon, size: 25));
     }
     return Container(
-      width: Lqr().width(60),
+      width: Lqr().width(80),
       child: Row(children: lists, mainAxisAlignment: MainAxisAlignment.spaceBetween),
     );
   }
 
   /// [过滤]
-  bool filter(LqrTreeListsModel data, val) {
+  bool filter(LqrTreeListsModel data) {
     if (widget.filter == null)
-      return data.name.contains(val);
+      return true;
     else
-      return widget.filter(data, val);
+      return widget.filter(data);
   }
 
   /// [点击]
@@ -205,6 +177,7 @@ class _LqrTreeState extends State<LqrTree> {
             _checkedDatas = {};
             _checkedDatas[0] = data;
           }
+          _onChanged();
           break;
         case false:
           data.isShow = !data.isShow;
@@ -214,7 +187,7 @@ class _LqrTreeState extends State<LqrTree> {
   }
 
   /// [回调]
-  void confirm() {
+  void _onChanged() {
     LqrTreeCalckback _a = LqrTreeCalckback();
     _a.checkedMap = _checkedDatas;
     _a.checkedLists = _checkedDatas.values.toList();
@@ -224,6 +197,6 @@ class _LqrTreeState extends State<LqrTree> {
     _a.allLevelsName = _a.parent.map((v) => v.map((e) => e.name).join(widget.separator)).toList();
     _a.allLevelsValue = _a.parent.map((v) => v.map((e) => e.value).toList()).toList();
     print(_a.allLevelsName);
-    Navigator.pop(context, _a);
+    widget.onChanged(_checkedDatas.isEmpty ? null : _a);
   }
 }

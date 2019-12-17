@@ -1,22 +1,20 @@
 import 'package:flutter_lqrui/lqr_common.dart';
 
 class LqrPickerImage extends StatefulWidget {
-  // 基础属性
+  /// [最多选择数量]
   final int maxImages;
+
+  /// [选择回调]
   final Function(List<MapEntry<String, MultipartFile>> val) callback;
   // form属性
   final title;
   final hintText;
-  final enabled;
   LqrPickerImage({
     Key key,
-    // 基础属性
     this.maxImages,
     this.callback,
-    // form属性
     this.title,
     this.hintText,
-    this.enabled = true,
   }) : super(key: key);
   @override
   _LqrPickerImageState createState() => new _LqrPickerImageState();
@@ -56,11 +54,7 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
           ByteData byteData = await requestList[i].getByteData(quality: 80);
           List<int> imageData = byteData.buffer.asUint8List();
           String fileName = "${Uuid().v1()}.png";
-          files.add(MapEntry(
-            "files",
-            MultipartFile.fromBytes(imageData, filename: fileName),
-          ));
-          // files.add(MultipartFile.fromBytes(imageData, filename: fileName));
+          files.add(MapEntry("files", MultipartFile.fromBytes(imageData, filename: fileName)));
         }
         widget.callback(files);
       }
@@ -75,9 +69,8 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        mainAxisSpacing: Lqr.ui.width(10),
-        crossAxisSpacing: Lqr.ui.width(10),
-        // childAspectRatio: 2.8, //框的比列
+        mainAxisSpacing: Lqr.ui.width(20),
+        crossAxisSpacing: Lqr.ui.width(20),
       ),
       itemCount: imageAsset.length < widget.maxImages ? imageAsset.length + 1 : imageAsset.length,
       itemBuilder: (BuildContext context, int i) {

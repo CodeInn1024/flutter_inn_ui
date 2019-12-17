@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 08:26:46
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-12 11:04:51
+ * @LastEditTime: 2019-12-17 18:02:55
 */
 
 export './lqr_button.dart';
@@ -14,6 +14,6 @@ export './lqr_image.dart';
 export './lqr_icon.dart';
 export './lqr_input_number.dart';
 export './lqr_image_preview.dart';
-export './lqr_input.dart';
+export './lqr_input/common.dart';
 export './lqr_collapse.dart';
 export './lqr_tree/common.dart';
