@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 15:20:46
+ * @LastEditTime: 2019-12-19 15:44:01
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -22,36 +22,66 @@ class LqrLineText extends StatelessWidget {
   /// [右边样式]
   final TextStyle rstyle;
 
+  /// [外边距]
+  final EdgeInsetsGeometry margin;
+
+  /// [一行多少个]
+  final int crossAxisCount;
+
+  /// [竖向间距]
+  final double mainAxisSpacing;
+
+  /// [横向间距]
+  final double crossAxisSpacing;
+
+  /// [连接符]
+  final String connector;
+
   const LqrLineText({
     Key key,
-    this.lists,
+    this.lists = const [],
     this.data,
     this.lstyle,
     this.rstyle,
+    this.margin = EdgeInsets.zero,
+    this.crossAxisCount = 1,
+    this.mainAxisSpacing = 0.0,
+    this.crossAxisSpacing = 0.0,
+    this.connector = "  ",
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return data != null
-        ? page(data)
-        : Row(
-            children: lists.map((v) => Expanded(flex: v.flex, child: page(v))).toList(),
-          );
+    List<LqrLineTextData> _a = [...lists];
+    if (data != null) _a.add(data);
+    List<List<LqrLineTextData>> _lists = _a.groupToCount(crossAxisCount);
+    return Container(
+      margin: margin,
+      child: Wrap(
+          runSpacing: Lqr.ui.width(mainAxisSpacing),
+          children: _lists
+              .map((v) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: v.map((f) => Expanded(flex: f.flex, child: page(f))).toList(),
+                  ))
+              .toList()),
+    );
   }
 
-  Widget page(v) {
+  Widget page(LqrLineTextData v) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(v.title, style: lstyle ?? TextStyle(color: LqrText.color2, fontSize: Lqr.ui.size(28))),
-        Text('  '),
+        Text(connector),
         Expanded(
           child: DefaultTextStyle(
             style: rstyle ?? TextStyle(color: LqrText.color3, fontSize: Lqr.ui.size(28)),
             child: Container(
               alignment: Alignment.centerLeft,
-              child: v.widget ?? Text(v.value ?? '', maxLines: 1),
+              child: v.widget ?? Text(v.value ?? '', maxLines: 1, style: TextStyle(color: v.valueColor)),
             ),
           ),
         ),
@@ -61,9 +91,26 @@ class LqrLineText extends StatelessWidget {
 }
 
 class LqrLineTextData {
+  /// [标题]
   final String title;
+
+  /// [内容字体颜色]
+  final Color valueColor;
+
+  /// [内容]
   final String value;
+
+  /// [widget]
   final Widget widget;
+
+  /// [占据比例]
   final int flex;
-  LqrLineTextData({this.title, this.value, this.widget, this.flex = 1});
+
+  LqrLineTextData({
+    this.title,
+    this.value,
+    this.widget,
+    this.flex = 1,
+    this.valueColor,
+  });
 }

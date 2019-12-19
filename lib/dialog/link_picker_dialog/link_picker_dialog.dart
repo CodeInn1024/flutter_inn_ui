@@ -100,7 +100,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
                             ),
                           ),
                           GestureDetector(
-                            child: Text('确定', style: TextStyle(color: Theme.of(context).primaryColor)),
+                            child: Text('确定', style: TextStyle(color: Lqr.ui.primaryColor)),
                             onTap: () {
                               List<LqrTreeListsModel> a = [...tabList];
                               if (a[tabKey].value != null) {

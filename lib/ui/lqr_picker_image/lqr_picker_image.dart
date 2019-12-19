@@ -5,16 +5,16 @@ class LqrPickerImage extends StatefulWidget {
   final int maxImages;
 
   /// [选择回调]
-  final Function(List<MapEntry<String, MultipartFile>> val) callback;
-  // form属性
-  final title;
-  final hintText;
+  final Function(List<MapEntry<String, MultipartFile>> val) onChange;
+
+  /// [上传的字段名]
+  final String uploadKey;
+
   LqrPickerImage({
     Key key,
     this.maxImages,
-    this.callback,
-    this.title,
-    this.hintText,
+    this.onChange,
+    this.uploadKey = "files",
   }) : super(key: key);
   @override
   _LqrPickerImageState createState() => new _LqrPickerImageState();
@@ -22,7 +22,8 @@ class LqrPickerImage extends StatefulWidget {
 
 class _LqrPickerImageState extends State<LqrPickerImage> {
   List<Asset> imageAsset = List<Asset>();
-  List<MapEntry<String, MultipartFile>> files = [];
+  List<MapEntry<String, MultipartFile>> _update = [];
+  List<String> _network = [];
 
   //多图选择器
   Future pickImage() async {
@@ -46,24 +47,23 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
       );
       if (!mounted) return;
       if (requestList.length != 0) {
-        setState(() {
-          imageAsset = requestList;
-        });
-        files.clear();
+        setState(() => imageAsset = requestList);
+        _update.clear();
         for (int i = 0; i < requestList.length; i++) {
           ByteData byteData = await requestList[i].getByteData(quality: 80);
           List<int> imageData = byteData.buffer.asUint8List();
-          String fileName = "${Uuid().v1()}.png";
-          files.add(MapEntry("files", MultipartFile.fromBytes(imageData, filename: fileName)));
+          // String fileName = "${Uuid().v1()}.png";
+          _update.add(MapEntry(widget.uploadKey, MultipartFile.fromBytes(imageData)));
         }
-        widget.callback(files);
+        widget.onChange(_update);
       }
     } catch (e) {
-      // lqrShowToast("操作失败：" + e.toString());
+      debugPrint(LqrUntils.printStr(e));
     }
   }
 
   Widget content() {
+    // int _itemCount;
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -91,12 +91,12 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
                           FlatButton(
                             child: Text('删除'),
                             onPressed: () {
-                              Navigator.of(context).pop();
                               setState(() {
                                 imageAsset.removeAt(imgIndex);
-                                files.removeAt(imgIndex);
-                                widget.callback(files);
+                                _update.removeAt(imgIndex);
+                                widget.onChange(_update);
                               });
+                              Navigator.of(context).pop();
                             },
                           ),
                         ],
@@ -112,33 +112,34 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.title == null) {
-      return content();
-    } else {
-      return Container(
-        alignment: Alignment.centerLeft,
-        padding: LqrEdge.edgeA(size: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: LqrEdge.edgeB(size: 10),
-              child: Text(widget.title, style: TextStyle(fontSize: Lqr.ui.size(30))),
-            ),
-            widget.hintText != null
-                ? Container(
-                    margin: LqrEdge.edgeB(size: 10),
-                    child: Text(
-                      "${widget.hintText}  (长按删除图片)",
-                      style: TextStyle(fontSize: Lqr.ui.size(24), color: LqrText.color2),
-                    ),
-                  )
-                : Container(),
-            content(),
-          ],
-        ),
-      );
-    }
+    return content();
+    // if (widget.title == null) {
+    //   return content();
+    // } else {
+    //   return Container(
+    //     alignment: Alignment.centerLeft,
+    //     padding: LqrEdge.edgeA(size: 10),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       mainAxisAlignment: MainAxisAlignment.start,
+    //       children: <Widget>[
+    //         Container(
+    //           margin: LqrEdge.edgeB(size: 10),
+    //           child: Text(widget.title, style: TextStyle(fontSize: Lqr.ui.size(30))),
+    //         ),
+    //         widget.hintText != null
+    //             ? Container(
+    //                 margin: LqrEdge.edgeB(size: 10),
+    //                 child: Text(
+    //                   "${widget.hintText}  (长按删除图片)",
+    //                   style: TextStyle(fontSize: Lqr.ui.size(24), color: LqrText.color2),
+    //                 ),
+    //               )
+    //             : Container(),
+    //         content(),
+    //       ],
+    //     ),
+    //   );
+    // }
   }
 }

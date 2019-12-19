@@ -80,12 +80,12 @@ class _LqrTreeState extends State<LqrTree> {
 
       /// [最大层级处理]
       if (level >= widget.level) {
-        item.children = [];
+        item.children = null;
         continue;
       }
 
       /// [遍历下级]
-      if (item.children.length > 0) {
+      if (item.children != null && item.children.length > 0) {
         traversal(item.children, level + 1, item.parent);
       }
     }
@@ -105,14 +105,14 @@ class _LqrTreeState extends State<LqrTree> {
   Widget page(LqrTreeListsModel data) {
     return Column(
       children: <Widget>[
-        data.children.length > 0 || filter(data)
+        data.children == null || filter(data)
             ? Container(
                 height: Lqr().width(60),
                 child: GestureDetector(
-                  onTap: () => onTap(data, data.children.length == 0),
+                  onTap: () => onTap(data, data.children == null),
                   child: Row(
                     children: <Widget>[
-                      LqrIcon(icon: data.children.length == 0 ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30),
+                      LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30),
                       Container(width: Lqr().width(30)),
                       Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
                       Container(width: Lqr().width(20)),
@@ -122,7 +122,7 @@ class _LqrTreeState extends State<LqrTree> {
                 ),
               )
             : Container(),
-        data.isShow && data.children.length > 0
+        data.isShow && data.children != null
             ? Container(
                 padding: LqrEdge.edgeL(size: 30),
                 child: Column(
@@ -139,15 +139,16 @@ class _LqrTreeState extends State<LqrTree> {
 
   /// [显示类型]
   Widget statusType(LqrTreeListsModel data) {
+    print(data.children);
     List<Widget> lists = [];
-    if (data.children.length == 0 || data.enabled) {
+    if (data.children == null || data.enabled) {
       IconData icon = widget.isMultiple && data.isSelect || _checkedDatas.length > 0 && data.value == _checkedDatas[0].value ? LqrIconType.radioOn : LqrIconType.radioOff;
       lists.add(GestureDetector(
         onTap: () => onTap(data, true),
         child: LqrIcon(icon: icon, size: 25),
       ));
     }
-    if (data.children.length > 0) {
+    if (data.children != null) {
       IconData icon = data.isShow ? LqrIconType.arrowUp : LqrIconType.arrowDown;
       lists.add(LqrIcon(icon: icon, size: 25));
     }

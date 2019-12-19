@@ -67,6 +67,9 @@ class LqrInput extends StatelessWidget {
   /// [输入框字体颜色]
   final double textColor;
 
+  /// [使用•替换，用于输入密码的场景等]
+  final bool obscureText;
+
   const LqrInput({
     Key key,
     this.onChanged,
@@ -91,6 +94,7 @@ class LqrInput extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 10),
     this.fontSize,
     this.textColor,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -124,6 +128,7 @@ class LqrInput extends StatelessWidget {
                 enabled: enabled,
                 maxLines: maxLines,
                 maxLength: maxLength,
+                obscureText: obscureText,
                 inputFormatters: inputFormatters,
                 style: TextStyle(
                   textBaseline: TextBaseline.alphabetic,

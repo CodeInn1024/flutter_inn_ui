@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-09 15:02:42
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-10 16:41:51
+ * @LastEditTime: 2019-12-19 15:44:43
 */
 
 class LqrTreeModel {
@@ -53,7 +53,7 @@ class LqrTreeListsModel {
   int key;
 
   /// [子元素]
-  List<LqrTreeListsModel> children = [];
+  List<LqrTreeListsModel> children;
 
   /// [同级选择元素]
   List<LqrTreeListsModel> lists = [];
