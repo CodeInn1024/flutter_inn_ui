@@ -4,11 +4,11 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-09 15:02:42
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-19 15:44:43
+ * @LastEditTime: 2019-12-20 17:58:30
 */
 
 class LqrTreeModel {
-  List<LqrTreeListsModel> lists;
+  List<LqrTreeListsModel> lists = [];
 
   LqrTreeModel({this.lists});
 

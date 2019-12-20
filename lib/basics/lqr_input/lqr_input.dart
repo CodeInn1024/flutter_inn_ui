@@ -70,6 +70,9 @@ class LqrInput extends StatelessWidget {
   /// [使用•替换，用于输入密码的场景等]
   final bool obscureText;
 
+  /// [右下角计算字符]
+  final String counterText;
+
   const LqrInput({
     Key key,
     this.onChanged,
@@ -95,6 +98,7 @@ class LqrInput extends StatelessWidget {
     this.fontSize,
     this.textColor,
     this.obscureText = false,
+    this.counterText = "",
   }) : super(key: key);
 
   @override
@@ -139,7 +143,7 @@ class LqrInput extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hintText,
-                  counterText: '',
+                  counterText: counterText,
                   contentPadding: maxLines > 1 ? EdgeInsets.zero : size.contentPadding,
                   icon: required
                       ? Row(

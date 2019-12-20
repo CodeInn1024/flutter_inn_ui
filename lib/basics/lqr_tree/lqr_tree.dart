@@ -107,8 +107,9 @@ class _LqrTreeState extends State<LqrTree> {
       children: <Widget>[
         data.children == null || filter(data)
             ? Container(
-                height: Lqr().width(60),
+                height: Lqr().width(70),
                 child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: () => onTap(data, data.children == null),
                   child: Row(
                     children: <Widget>[
@@ -139,21 +140,20 @@ class _LqrTreeState extends State<LqrTree> {
 
   /// [显示类型]
   Widget statusType(LqrTreeListsModel data) {
-    print(data.children);
     List<Widget> lists = [];
     if (data.children == null || data.enabled) {
       IconData icon = widget.isMultiple && data.isSelect || _checkedDatas.length > 0 && data.value == _checkedDatas[0].value ? LqrIconType.radioOn : LqrIconType.radioOff;
       lists.add(GestureDetector(
         onTap: () => onTap(data, true),
-        child: LqrIcon(icon: icon, size: 25),
+        child: LqrIcon(icon: icon, size: 30),
       ));
     }
     if (data.children != null) {
       IconData icon = data.isShow ? LqrIconType.arrowUp : LqrIconType.arrowDown;
-      lists.add(LqrIcon(icon: icon, size: 25));
+      lists.add(LqrIcon(icon: icon, size: 30));
     }
     return Container(
-      width: Lqr().width(80),
+      width: Lqr().width(90),
       child: Row(children: lists, mainAxisAlignment: MainAxisAlignment.spaceBetween),
     );
   }

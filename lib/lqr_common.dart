@@ -42,7 +42,6 @@ export './ui/lqr_search/lqr_search.dart';
 export './ui/lqr_select_lists/lqr_select_lists.dart';
 export './ui/lqr_search_lists/lqr_search_lists.dart';
 export './ui/lqr_time_line/lqr_time_line.dart';
-export './ui/lqr_picker_image/lqr_picker_image.dart';
 export './ui/lqr_back_desktop/lqr_back_desktop.dart';
 
 // hint
