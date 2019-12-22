@@ -28,6 +28,8 @@ class LqrTree extends StatefulWidget {
   /// [改变事件]
   final Function(LqrTreeCalckback data) onChanged;
 
+  final List test;
+
   const LqrTree({
     Key key,
     @required this.lists,
@@ -39,6 +41,7 @@ class LqrTree extends StatefulWidget {
     this.checkIndex,
     this.separator = ' / ',
     this.onChanged,
+    this.test,
   })  : level = level ?? 10,
         super(key: key);
 
@@ -54,14 +57,29 @@ class _LqrTreeState extends State<LqrTree> {
   @override
   void initState() {
     super.initState();
-    _lists = LqrTreeModel.fromJson(LqrTreeModel(lists: widget.lists).toJson()).lists;
-    traversal(_lists, 1, []);
+    _lists = traversal(widget.test, 1, []);
   }
 
-  void traversal(List<LqrTreeListsModel> obj, int level, List<TreeParent> parent) {
-    for (LqrTreeListsModel item in obj) {
-      /// [是否全部展开]
-      if (widget.expandAll) item.isShow = true;
+  List<LqrTreeListsModel> traversal(List obj, int level, List<TreeParent> parent) {
+    List<LqrTreeListsModel> _a = [];
+    for (Map json in obj) {
+      LqrTreeListsModel item = LqrTreeListsModel(
+        name: json['name'],
+        value: json['value'],
+        enabled: json['enabled'] != null ? json['enabled'] : false,
+        isSelect: json['isSelect'] ?? widget.expandAll,
+        isUnfold: json['isUnfold'] != null ? json['isUnfold'] : false,
+        info: json['info'] != null ? json['info'] : {},
+        key: json['key'] != null ? json['key'] : 0,
+        lists: [],
+      );
+
+      if (json['lists'] != null) {
+        item.lists = new List<LqrTreeListsModel>();
+        json['lists'].forEach((v) {
+          item.lists.add(new LqrTreeListsModel.fromJson(v));
+        });
+      }
 
       /// [反选]
       List<LqrTreeListsModel> aList = [...item.lists, item];
@@ -81,14 +99,18 @@ class _LqrTreeState extends State<LqrTree> {
       /// [最大层级处理]
       if (level >= widget.level) {
         item.children = null;
-        continue;
       }
 
       /// [遍历下级]
-      if (item.children != null && item.children.length > 0) {
-        traversal(item.children, level + 1, item.parent);
+      if (json['children'] != null) {
+        item.children = traversal(json['children'], level + 1, item.parent);
       }
+
+      // if (item.children == null && !widget.filter(item)) continue;
+
+      _a.add(item);
     }
+    return _a;
   }
 
   @override
@@ -105,7 +127,8 @@ class _LqrTreeState extends State<LqrTree> {
   Widget page(LqrTreeListsModel data) {
     return Column(
       children: <Widget>[
-        data.children == null || filter(data)
+        // 子级选择
+        data.children == null && (widget.filter == null || widget.filter(data))
             ? Container(
                 height: Lqr().width(70),
                 child: GestureDetector(
@@ -123,7 +146,28 @@ class _LqrTreeState extends State<LqrTree> {
                 ),
               )
             : Container(),
-        data.isShow && data.children != null
+        // 父级
+        data.children != null && data.children.length > 0
+            ? Container(
+                height: Lqr().width(70),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => onTap(data, data.children == null),
+                  child: Row(
+                    children: <Widget>[
+                      LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30),
+                      Container(width: Lqr().width(30)),
+                      Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
+                      Container(width: Lqr().width(20)),
+                      statusType(data),
+                    ],
+                  ),
+                ),
+              )
+            : Container(),
+
+        // 子级显示
+        data.isUnfold && data.children != null
             ? Container(
                 padding: LqrEdge.edgeL(size: 30),
                 child: Column(
@@ -133,6 +177,7 @@ class _LqrTreeState extends State<LqrTree> {
                 ),
               )
             : Container(),
+        //同级显示
         ...data.lists.map((LqrTreeListsModel v) => page(v)),
       ],
     );
@@ -149,7 +194,7 @@ class _LqrTreeState extends State<LqrTree> {
       ));
     }
     if (data.children != null) {
-      IconData icon = data.isShow ? LqrIconType.arrowUp : LqrIconType.arrowDown;
+      IconData icon = data.isUnfold ? LqrIconType.arrowUp : LqrIconType.arrowDown;
       lists.add(LqrIcon(icon: icon, size: 30));
     }
     return Container(
@@ -159,12 +204,12 @@ class _LqrTreeState extends State<LqrTree> {
   }
 
   /// [过滤]
-  bool filter(LqrTreeListsModel data) {
-    if (widget.filter == null)
-      return true;
-    else
-      return widget.filter(data);
-  }
+  // bool filter(LqrTreeListsModel data) {
+  //   if (widget.filter == null)
+  //     return true;
+  //   else
+  //     return widget.filter(data);
+  // }
 
   /// [点击]
   void onTap(LqrTreeListsModel data, type) {
@@ -181,7 +226,7 @@ class _LqrTreeState extends State<LqrTree> {
           _onChanged();
           break;
         case false:
-          data.isShow = !data.isShow;
+          data.isUnfold = !data.isUnfold;
           break;
       }
     });

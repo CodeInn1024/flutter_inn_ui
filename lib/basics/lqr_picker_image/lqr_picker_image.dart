@@ -130,8 +130,8 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
         for (int i = 0; i < requestList.length; i++) {
           ByteData byteData = await requestList[i].getByteData(quality: 80);
           List<int> imageData = byteData.buffer.asUint8List();
-          // String fileName = "${Uuid().v1()}.png";
-          widget.addFiles.add(MapEntry(widget.uploadKey, MultipartFile.fromBytes(imageData)));
+          String fileName = "${Uuid().v1()}.png";
+          widget.addFiles.add(MapEntry(widget.uploadKey, MultipartFile.fromBytes(imageData, filename: fileName)));
         }
         update();
       }

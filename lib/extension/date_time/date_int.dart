@@ -15,6 +15,7 @@ int maxDay = 30;
 extension ParseDateByInt on int {
   /// [时间的开始, (y, m, d)]
   int dateStartByMs({bool isUtc = false, String type = "d"}) {
+    if (this == null) return null;
     DateTime d = DateTime.fromMillisecondsSinceEpoch(this, isUtc: isUtc);
     DateTime ms;
     switch (type) {
@@ -34,6 +35,7 @@ extension ParseDateByInt on int {
 
   /// [时间的结束, (y, m, d)]
   int dateEndByMs({bool isUtc = false, String type = "d"}) {
+    if (this == null) return null;
     DateTime d = DateTime.fromMillisecondsSinceEpoch(this, isUtc: isUtc);
     DateTime ms;
     switch (type) {

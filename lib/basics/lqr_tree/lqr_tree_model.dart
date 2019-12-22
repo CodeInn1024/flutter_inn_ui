@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-09 15:02:42
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-20 17:58:30
+ * @LastEditTime: 2019-12-20 16:24:15
 */
 
 class LqrTreeModel {
@@ -44,7 +44,7 @@ class LqrTreeListsModel {
   bool isSelect;
 
   /// [是否展开]
-  bool isShow;
+  bool isUnfold;
 
   /// [信息]
   Map<String, dynamic> info;
@@ -66,11 +66,12 @@ class LqrTreeListsModel {
     this.value = '',
     this.children,
     this.enabled,
-    this.isShow,
+    this.isUnfold,
     this.info,
     this.key,
     this.lists,
     this.parent,
+    this.isSelect,
   });
 
   LqrTreeListsModel.fromJson(Map<String, dynamic> json) {
@@ -78,7 +79,7 @@ class LqrTreeListsModel {
     value = json['value'];
     enabled = json['enabled'] != null ? json['enabled'] : false;
     isSelect = json['isSelect'] != null ? json['isSelect'] : false;
-    isShow = json['isShow'] != null ? json['isShow'] : false;
+    isUnfold = json['isUnfold'] != null ? json['isUnfold'] : false;
     info = json['info'] != null ? json['info'] : {};
     key = json['key'] != null ? json['key'] : 0;
     if (json['children'] != null) {
@@ -101,7 +102,7 @@ class LqrTreeListsModel {
     data['value'] = this.value;
     data['enabled'] = this.enabled;
     data['isSelect'] = this.isSelect;
-    data['isShow'] = this.isShow;
+    data['isShow'] = this.isUnfold;
     data['info'] = this.info;
     data['key'] = this.key;
     if (this.children != null) {
