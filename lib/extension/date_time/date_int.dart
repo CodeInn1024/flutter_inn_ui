@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-20 16:58:16
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-20 17:48:26
+ * @LastEditTime: 2019-12-23 16:31:46
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -57,4 +57,7 @@ extension ParseDateByInt on int {
   DateTime getDateTimeByMs({bool isUtc = false}) {
     return DateTime.fromMillisecondsSinceEpoch(this, isUtc: isUtc);
   }
+
+  /// [时间格式化]
+  String formatDate({String format}) => DateUtil.formatDateMs(this, format: format ?? Lqr.ui.format);
 }

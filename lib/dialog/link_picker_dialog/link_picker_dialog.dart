@@ -103,7 +103,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
                             child: Text('确定', style: TextStyle(color: Lqr.ui.primaryColor)),
                             onTap: () {
                               List<LqrTreeListsModel> a = [...tabList];
-                              if (a[tabKey].value != null) {
+                              if (a[tabKey].value != null && a[tabKey].value.isNotEmpty) {
                                 widget.callback(a);
                                 Navigator.of(context).pop();
                               } else {

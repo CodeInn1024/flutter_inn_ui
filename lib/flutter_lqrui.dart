@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 12:51:21
+ * @LastEditTime: 2019-12-23 16:32:13
 */
 
 import './lqr_common.dart';
@@ -55,6 +55,9 @@ class Lqr {
   /// [单选 未选中样式]
   final Widget radioOff;
 
+  /// [时间格式]
+  final String format;
+
   const Lqr({
     this.scaffoldCtx,
     this.designWidth = 750,
@@ -70,6 +73,7 @@ class Lqr {
     this.imageError = const LqrImageError(),
     this.radioOn = const LqrRadioOn(),
     this.radioOff = const LqrRadioOff(),
+    this.format = "yyyy-M-d HH:mm:ss",
   });
 
   void init(BuildContext context) {
