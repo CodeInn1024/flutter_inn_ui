@@ -4,42 +4,25 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:15:00
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 15:41:11
+ * @LastEditTime: 2020-01-02 17:23:59
 */
 
 import 'package:lqrui/common/common.dart';
-import 'package:lqrui/pages/style/style.dart';
-import 'package:lqrui/pages/basics/basics.dart';
+import 'package:lqrui/pages/component/component.dart';
 import 'package:lqrui/pages/about/about.dart';
 import 'package:lqrui/pages/extension/extension.dart';
 
 List homePages = [
   {
-    "widget": BottomNavigationBarItem(
-      icon: Icon(Icons.style),
-      title: Text('样式'),
-    ),
-    "content": Style(),
+    "widget": BottomNavigationBarItem(icon: Icon(Icons.border_all), title: Text('组件')),
+    "content": Component(),
   },
   {
-    "widget": BottomNavigationBarItem(
-      icon: Icon(Icons.border_all),
-      title: Text('基础'),
-    ),
-    "content": Basics(),
-  },
-  {
-    "widget": BottomNavigationBarItem(
-      icon: Icon(Icons.verified_user),
-      title: Text('扩展'),
-    ),
+    "widget": BottomNavigationBarItem(icon: Icon(Icons.verified_user), title: Text('扩展')),
     "content": Extension(),
   },
   {
-    "widget": BottomNavigationBarItem(
-      icon: Icon(Icons.verified_user),
-      title: Text('关于'),
-    ),
+    "widget": BottomNavigationBarItem(icon: Icon(Icons.verified_user), title: Text('关于')),
     "content": About(),
   },
 ];

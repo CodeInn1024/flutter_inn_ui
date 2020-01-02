@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-06 15:22:51
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 08:55:12
+ * @LastEditTime: 2020-01-02 17:56:20
 */
 
 import 'package:lqrui/common/common.dart';
@@ -98,7 +98,7 @@ class BasicsImage extends StatelessWidget {
                 src: "https://img3.mukewang.com/szimg/5dc9047a09bae31e12000676-360-202.png",
                 width: 100,
                 height: 100,
-                onTap: () => lqrRouter132(LqrImagePreview(index: i, list: previewList)),
+                // onTap: () => LqrRouter.push(LqrRouterClass(LqrImagePreview(index: i, list: previewList))),
               );
             },
           ),

@@ -4,17 +4,17 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-05 16:37:44
+ * @LastEditTime: 2020-01-02 17:57:50
 */
 import 'package:lqrui/common/common.dart';
 
-class StyleColor extends StatefulWidget {
-  const StyleColor({Key key}) : super(key: key);
+class BasicsColor extends StatefulWidget {
+  const BasicsColor({Key key}) : super(key: key);
   @override
-  _StyleColorState createState() => _StyleColorState();
+  _BasicsColorState createState() => _BasicsColorState();
 }
 
-class _StyleColorState extends State<StyleColor> {
+class _BasicsColorState extends State<BasicsColor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

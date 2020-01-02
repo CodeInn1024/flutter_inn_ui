@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-11-21 11:48:54
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-12 11:04:58
+ * @LastEditTime: 2020-01-02 18:04:00
 */
 
 export 'dart:async';
@@ -13,8 +13,7 @@ export 'dart:convert';
 export 'package:flutter/services.dart';
 export 'package:flutter/material.dart';
 export 'package:decimal/decimal.dart';
-export 'package:flutter/cupertino.dart'
-    show CupertinoAlertDialog, CupertinoNavigationBar, CupertinoPageScaffold;
+export 'package:flutter/cupertino.dart' show CupertinoAlertDialog, CupertinoNavigationBar, CupertinoPageScaffold, CupertinoPageRoute;
 export './flutter_lqrui.dart';
 
 export 'package:provider/provider.dart';
@@ -48,13 +47,6 @@ export './ui/lqr_back_desktop/lqr_back_desktop.dart';
 export './hint/lqr_error.dart';
 export './hint/lqr_nodata.dart';
 
-// dialog
-export './dialog/lqr_picker_date_range/lqr_picker_date_range.dart';
-export './dialog/lqr_dialog_select/lqr_dialog_select.dart';
-export './dialog/lqr_picker_date/lqr_picker_date.dart';
-export './dialog/lqr_time_range/lqr_time_range.dart';
-export './dialog/link_picker_dialog/link_picker_dialog.dart';
-
 // provider
 export './store/index.dart';
 export './router/common.dart';
@@ -63,4 +55,4 @@ export './basics/common.dart';
 export './untils/common.dart';
 export './extension/common.dart';
 export './style/common.dart';
-export './dialog/common.dart';
+export './feedback/common.dart';

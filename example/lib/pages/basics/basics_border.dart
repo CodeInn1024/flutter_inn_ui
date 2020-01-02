@@ -4,17 +4,17 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 14:43:46
+ * @LastEditTime: 2020-01-02 17:58:55
 */
 import 'package:lqrui/common/common.dart';
 
-class StyleBorder extends StatefulWidget {
-  const StyleBorder({Key key}) : super(key: key);
+class BasicsBorder extends StatefulWidget {
+  const BasicsBorder({Key key}) : super(key: key);
   @override
-  _StyleBorderState createState() => _StyleBorderState();
+  _BasicsBorderState createState() => _BasicsBorderState();
 }
 
-class _StyleBorderState extends State<StyleBorder> {
+class _BasicsBorderState extends State<BasicsBorder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

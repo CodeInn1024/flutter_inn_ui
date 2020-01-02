@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 11:40:15
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-16 10:17:44
+ * @LastEditTime: 2020-01-02 17:44:34
 */
 
 import './common/common.dart';
@@ -27,15 +27,15 @@ class MyApp extends StatelessWidget {
       navigatorKey: LqrRouter.navKey,
       home: LqrBackDesktop(
         builder: (scaffoldCtx) {
-          LqrRouter.defaultType = LqrRouterType.material;
+          // [设置全局路由默认过度动画]
+          LqrRouter.transition = LqrRouterTransition.cupertino;
           Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx, primaryColor: LqrColor.red)..init(scaffoldCtx);
           LqrAppBarTheme.ui = LqrAppBarTheme(gradient: LqrGradient.linear45(LqrColor.redG), textColor: Colors.white);
           LqrButtonTheme.ui = LqrButtonTheme(type: LqrButtonType.redGradient);
-          return Store.value<IndexStore>(context).showSplash ? SplashPage() : Store.value<IndexStore>(context).token == '0' ? UserLogin() : HomePage();
+          // return Store.value<IndexStore>(context).showSplash ? SplashPage() : Store.value<IndexStore>(context).token == '0' ? UserLogin() : HomePage();
+          return HomePage();
         },
       ),
-      // routes: APPRoute.routes,
-      // onGenerateRoute: APPRoute.onGenerateRoute,
     );
   }
 }

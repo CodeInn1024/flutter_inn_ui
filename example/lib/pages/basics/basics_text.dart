@@ -4,17 +4,17 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 14:44:50
+ * @LastEditTime: 2020-01-02 18:00:17
 */
 import 'package:lqrui/common/common.dart';
 
-class StyleText extends StatefulWidget {
-  const StyleText({Key key}) : super(key: key);
+class BasicsText extends StatefulWidget {
+  const BasicsText({Key key}) : super(key: key);
   @override
-  _StyleTextState createState() => _StyleTextState();
+  _BasicsTextState createState() => _BasicsTextState();
 }
 
-class _StyleTextState extends State<StyleText> {
+class _BasicsTextState extends State<BasicsText> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

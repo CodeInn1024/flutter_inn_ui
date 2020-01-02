@@ -4,59 +4,50 @@
  * @Autor: lqrui.cn
  * @Date: 2019-10-28 08:51:12
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-25 16:58:28
+ * @LastEditTime: 2020-01-02 17:44:57
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
 
 /// [MaterialApp] 添加 `navigatorKey: LqrRouter.navKey`
 ///
-/// 设置全局默认过度动画 `LqrRouter.defaultType = LqrRouterType.material;`
+/// 设置全局路由默认过度动画 `LqrRouter.transition = LqrRouterTransition.cupertino;`
 class LqrRouter {
   /// [navigatorKey]
   static GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
-  /// [默认过度动画]
-  static LqrRouterType defaultType = LqrRouterType.cupertino;
+  /// [设置全局路由默认过度动画]
+  static Route<dynamic> Function(LqrRouterClass) transition = LqrRouterTransition.cupertino;
 
   /// [角色]
   static List<String> roles = [];
 
-  /// [组件路由跳转]
-  static push(LqrRouterClass router) async {
-    if (!await hook(router)) return;
-    return navKey.currentState.push(animationType(router));
-  }
-
+  //++++++++++
   /// [返回]
   static pop([data = ""]) => navKey.currentState.pop(data);
 
+  /// [返回到指定路由]
+  static popUntil(String path) => navKey.currentState.popUntil(ModalRoute.withName(path));
+
   /// [销毁当前页面并跳转新页面]
-  static removeRoute(LqrRouterClass router) => navKey.currentState.removeRoute(animationType(router));
-}
+  static removeRoute(LqrRouterClass route) => navKey.currentState.removeRoute(route.transition(route));
 
-Route<dynamic> animationType(LqrRouterClass router) {
-  Route _r;
-  switch (router.type) {
-    case LqrRouterType.cupertino:
-      _r = LqrRouterAnimation.cupertino(router.page);
-      break;
-    case LqrRouterType.material:
-      _r = LqrRouterAnimation.material(router.page);
-      break;
+  /// [跳转新页面]
+  static push(LqrRouterClass route) async {
+    if (!await hook(route)) return;
+    return navKey.currentState.push(route.transition(route));
   }
-  return _r;
 }
 
-Future hook(LqrRouterClass router) async {
-  bool permission = router.roles.any((item) => LqrRouter.roles.indexOf(item) != -1);
-  if (router.roles != null && router.roles.isNotEmpty && !permission) {
-    debugPrint(LqrUntils.printStr(
-      "权限不足：${router.title}",
-      ['用户角色：${LqrRouter.roles.join('/')}', '路由角色：${router.roles.join('/')}'],
-    ));
-    if (router.notAllowFun != null)
-      return router.notAllowFun();
+Future hook(LqrRouterClass route) async {
+  bool permission = route.roles.any((item) => LqrRouter.roles.indexOf(item) != -1);
+  if (route.roles != null && route.roles.isNotEmpty && !permission) {
+    LqrUntils.print(
+      "权限不足：${route.title}",
+      ['用户角色：${LqrRouter.roles.join('/')}', '路由角色：${route.roles.join('/')}'],
+    );
+    if (route.notAllowFun != null)
+      return route.notAllowFun();
     else
       return false;
   } else {

@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
- * @LastEditors: hwd
- * @LastEditTime: 2019-12-13 17:00:56
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2020-01-02 15:36:36
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -40,9 +40,20 @@ class LqrUntils {
   /// [打印]
   static String printStr(String value, [List val]) => """
   \n════════════════════════╡ Flutter Lqr UI ╞═════════════════════════════════════
-  \n══╡ +++ $value +++ ╞════
+══╡ +++ $value +++ ╞════
   ${val.map((v) => '\n══╡ +++ $v +++ ╞════').toList().join("")}
   """;
+
+  /// [日志打印]
+  static void print(String value, [List val]) {
+    List<String> _val = val ?? [];
+    String _a = """
+  \n════════════════════════╡ Flutter Lqr UI ╞═════════════════════════════════════
+══╡ +++ $value +++ ╞════
+  ${_val.map((v) => '\n══╡ +++ $v +++ ╞════').toList().join("")}
+  """;
+    debugPrint(_a);
+  }
 
   /// shijan
   static Duration duration(String value) {
@@ -54,7 +65,6 @@ class LqrUntils {
         break;
       case 'm':
         _milliseconds = int.parse(decimalMtp([_value[0], '60000']).toString());
-        print(_milliseconds);
         break;
       case 's':
         _milliseconds = int.parse(decimalMtp([_value[0], '1000']).toString());
