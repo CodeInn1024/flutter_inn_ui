@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-10 17:07:32
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 09:44:33
+ * @LastEditTime: 2019-12-24 10:05:17
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -34,11 +34,11 @@ class LqrTreeCalckback {
 
   LqrTreeCalckback({
     this.name = '',
-    this.checkedLists = const [],
+    this.checkedLists,
     this.checkedMap = const {},
-    this.value = const [],
-    this.parent = const [],
-    this.allLevelsName = const [],
-    this.allLevelsValue = const [],
+    this.value,
+    this.parent,
+    this.allLevelsName,
+    this.allLevelsValue,
   });
 }

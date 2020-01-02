@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 17:58:12
+ * @LastEditTime: 2019-12-27 16:36:07
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -32,10 +32,10 @@ class LqrEdge {
 
   /// [高自定义边距]
   static EdgeInsetsGeometry edgeH({double size, double left, double top, double right, double bottom, double tb, double lr}) => EdgeInsets.fromLTRB(
-        Lqr.ui.width(lr ?? size ?? left ?? 0.0),
-        Lqr.ui.width(tb ?? size ?? top ?? 0.0),
-        Lqr.ui.width(lr ?? size ?? right ?? 0.0),
-        Lqr.ui.width(tb ?? size ?? bottom ?? 0.0),
+        Lqr.ui.width(left ?? lr ?? size ?? 0.0),
+        Lqr.ui.width(top ?? tb ?? size ?? 0.0),
+        Lqr.ui.width(right ?? lr ?? size ?? 0.0),
+        Lqr.ui.width(bottom ?? tb ?? size ?? 0.0),
       );
 
   /// [左右边距]

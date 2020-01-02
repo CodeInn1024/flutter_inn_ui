@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-11 11:32:40
+ * @LastEditTime: 2019-12-27 11:23:07
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -53,7 +53,7 @@ class LqrRefresh extends StatefulWidget {
     Key key,
     this.child,
     this.noDataWidget,
-    this.list,
+    this.list = const [],
     this.onRefresh,
     this.loadMore,
     this.enableControlFinishRefresh = false,
@@ -86,7 +86,7 @@ class _LqrRefreshState extends State<LqrRefresh> {
       controller: widget.loadingController,
       firstRefresh: widget.firstRefresh,
       topBouncing: widget.topBouncing,
-      emptyWidget: widget.list != null && widget.list.length == 0 ? widget.emptyWidget : null,
+      emptyWidget: _loadIndex == 0 && widget.list.length == 0 ? widget.emptyWidget : null,
       header: ClassicalHeader(
         refreshText: "下拉刷新",
         refreshReadyText: '释放刷新',

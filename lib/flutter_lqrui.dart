@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-23 16:32:13
+ * @LastEditTime: 2019-12-25 11:29:41
 */
 
 import './lqr_common.dart';
@@ -40,6 +40,9 @@ class Lqr {
   /// [信息色] Info int
   final Color infoColor;
 
+  /// [图标颜色] Info int
+  final Color iconColor;
+
   /// [图标]
   final String iconFamily;
 
@@ -68,6 +71,7 @@ class Lqr {
     this.warningColor = const Color(0xFFE6A23C),
     this.dangerColor = const Color(0xFFF56C6C),
     this.infoColor = const Color(0xFF909399),
+    this.iconColor = const Color(0xFFC0C4CC),
     this.iconFamily = 'IconFont',
     this.imageLoading = const LqrImageLoading(),
     this.imageError = const LqrImageError(),

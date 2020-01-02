@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 08:51:09
+ * @LastEditTime: 2019-12-31 15:41:35
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -73,8 +73,8 @@ class LqrImageLoading extends StatelessWidget {
         height: Lqr.ui.width(24),
         child: CircularProgressIndicator(
           strokeWidth: 2.0,
-          backgroundColor: Theme.of(context).primaryColor,
-          valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
+          backgroundColor: Lqr.ui.primaryColor,
+          valueColor: AlwaysStoppedAnimation(Colors.white),
         ),
       ),
     );

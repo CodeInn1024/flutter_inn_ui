@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: lqrui.cn
+ * @Date: 2019-12-24 09:36:45
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2019-12-24 11:23:39
+*/
 import 'package:flutter_lqrui/lqr_common.dart';
 export './index.dart' show LqrRouter;
 export './animation.dart';
@@ -21,6 +29,12 @@ class LqrRouterClass {
   /// 权限不足
   final bool Function() notAllowFun;
 
+  /// 图标
+  final int icon;
+
+  /// 颜色
+  final int color;
+
   LqrRouterClass(
     this.page, {
     this.path = '',
@@ -28,6 +42,8 @@ class LqrRouterClass {
     this.title = '',
     LqrRouterType type,
     this.notAllowFun,
+    this.icon,
+    this.color,
   }) : type = type ?? LqrRouter.defaultType;
 }
 

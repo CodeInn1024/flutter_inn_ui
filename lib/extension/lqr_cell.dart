@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 09:11:56
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 15:58:07
+ * @LastEditTime: 2019-12-25 09:56:51
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -34,6 +34,9 @@ class LqrCell extends StatefulWidget {
   /// [圆角]
   final BorderRadiusGeometry borderRadius;
 
+  /// [内边距]
+  final EdgeInsetsGeometry  padding;
+
   const LqrCell({
     Key key,
     this.left,
@@ -44,7 +47,8 @@ class LqrCell extends StatefulWidget {
     this.background = Colors.white,
     this.titleColor = LqrText.color2,
     this.borderRadius,
-  }) : super(key: key);
+    this.padding,
+  })  : super(key: key);
 
   @override
   _LqrCellState createState() => _LqrCellState();
@@ -61,7 +65,7 @@ class _LqrCellState extends State<LqrCell> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        padding: LqrEdge.edgeA(),
+        padding: widget.padding ?? LqrEdge.edgeA(),
         margin: widget.margin,
         decoration: BoxDecoration(
           color: widget.background,

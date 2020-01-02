@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-19 15:44:01
+ * @LastEditTime: 2019-12-27 17:00:09
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -55,18 +55,18 @@ class LqrLineText extends StatelessWidget {
     List<LqrLineTextData> _a = [...lists];
     if (data != null) _a.add(data);
     List<List<LqrLineTextData>> _lists = _a.groupToCount(crossAxisCount);
-    return Container(
-      margin: margin,
-      child: Wrap(
-          runSpacing: Lqr.ui.width(mainAxisSpacing),
-          children: _lists
-              .map((v) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: v.map((f) => Expanded(flex: f.flex, child: page(f))).toList(),
-                  ))
-              .toList()),
-    );
+
+    List<Widget> _b = [];
+    for (var i = 0; i < _lists.length; i++) {
+      _b.add(Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _lists[i].map((f) => Expanded(flex: f.flex, child: page(f))).toList(),
+      ));
+      if (i < _lists.length) _b.add(Container(height: Lqr.ui.width(mainAxisSpacing)));
+    }
+
+    return Container(margin: margin, child: Column(children: _b));
   }
 
   Widget page(LqrLineTextData v) {
@@ -81,7 +81,7 @@ class LqrLineText extends StatelessWidget {
             style: rstyle ?? TextStyle(color: LqrText.color3, fontSize: Lqr.ui.size(28)),
             child: Container(
               alignment: Alignment.centerLeft,
-              child: v.widget ?? Text(v.value ?? '', maxLines: 1, style: TextStyle(color: v.valueColor)),
+              child: v.widget ?? Text(v.value ?? '', maxLines: v.maxLines, style: TextStyle(color: v.valueColor), overflow: TextOverflow.ellipsis),
             ),
           ),
         ),
@@ -106,11 +106,15 @@ class LqrLineTextData {
   /// [占据比例]
   final int flex;
 
+  /// [最大行数]
+  final int maxLines;
+
   LqrLineTextData({
     this.title,
     this.value,
     this.widget,
     this.flex = 1,
     this.valueColor,
+    this.maxLines = 1,
   });
 }

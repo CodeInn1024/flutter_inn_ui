@@ -143,6 +143,11 @@ class LqrInput extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: hintText,
+                  hintStyle: TextStyle(
+                    textBaseline: TextBaseline.alphabetic,
+                    color: theme.disabledColor,
+                    fontSize: _fontSize,
+                  ),
                   counterText: counterText,
                   contentPadding: maxLines > 1 ? EdgeInsets.zero : size.contentPadding,
                   icon: required

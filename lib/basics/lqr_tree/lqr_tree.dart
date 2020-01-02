@@ -30,6 +30,15 @@ class LqrTree extends StatefulWidget {
 
   final List test;
 
+  /// [边距]
+  final double padding;
+
+  /// [线]
+  final bool showLine;
+
+  /// [高度]
+  final double height;
+
   const LqrTree({
     Key key,
     @required this.lists,
@@ -42,6 +51,9 @@ class LqrTree extends StatefulWidget {
     this.separator = ' / ',
     this.onChanged,
     this.test,
+    this.padding = 30,
+    this.showLine = true,
+    this.height = 80,
   })  : level = level ?? 10,
         super(key: key);
 
@@ -99,14 +111,14 @@ class _LqrTreeState extends State<LqrTree> {
       /// [最大层级处理]
       if (level >= widget.level) {
         item.children = null;
+        _a.add(item);
+        continue;
       }
 
       /// [遍历下级]
       if (json['children'] != null) {
         item.children = traversal(json['children'], level + 1, item.parent);
       }
-
-      // if (item.children == null && !widget.filter(item)) continue;
 
       _a.add(item);
     }
@@ -119,97 +131,68 @@ class _LqrTreeState extends State<LqrTree> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: _lists.map((LqrTreeListsModel v) => page(v)).toList(),
+        children: _lists.map((LqrTreeListsModel v) => page(v, 1)).toList(),
       ),
     );
   }
 
-  Widget page(LqrTreeListsModel data) {
+  Widget page(LqrTreeListsModel data, int level) {
     return Column(
       children: <Widget>[
-        // 子级选择
-        data.children == null && (widget.filter == null || widget.filter(data))
-            ? Container(
-                height: Lqr().width(70),
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => onTap(data, data.children == null),
-                  child: Row(
-                    children: <Widget>[
-                      LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30),
-                      Container(width: Lqr().width(30)),
-                      Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
-                      Container(width: Lqr().width(20)),
-                      statusType(data),
-                    ],
-                  ),
-                ),
-              )
-            : Container(),
-        // 父级
-        data.children != null && data.children.length > 0
-            ? Container(
-                height: Lqr().width(70),
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => onTap(data, data.children == null),
-                  child: Row(
-                    children: <Widget>[
-                      LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30),
-                      Container(width: Lqr().width(30)),
-                      Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
-                      Container(width: Lqr().width(20)),
-                      statusType(data),
-                    ],
-                  ),
-                ),
-              )
-            : Container(),
-
+        Container(
+          height: Lqr().width(widget.height),
+          padding: LqrEdge.edgeL(size: widget.padding * level),
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => onTap(data, data.children == null),
+            child: Row(
+              children: <Widget>[
+                LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30, color: level == 1 ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
+                Container(width: Lqr().width(30)),
+                Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
+                Container(width: Lqr().width(20)),
+                statusType(data, level),
+                Container(width: Lqr().width(widget.padding)),
+              ],
+            ),
+          ),
+        ),
+        widget.showLine ? LqrBorder.divider(color: Colors.white) : Container(),
         // 子级显示
         data.isUnfold && data.children != null
             ? Container(
-                padding: LqrEdge.edgeL(size: 30),
+                color: Lqr.ui.backgroundColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: data.children.map((LqrTreeListsModel v) => page(v)).toList(),
+                  children: data.children.map((LqrTreeListsModel v) => page(v, level + 1)).toList(),
                 ),
               )
             : Container(),
         //同级显示
-        ...data.lists.map((LqrTreeListsModel v) => page(v)),
+        ...data.lists.map((LqrTreeListsModel v) => page(v, level)),
       ],
     );
   }
 
   /// [显示类型]
-  Widget statusType(LqrTreeListsModel data) {
+  Widget statusType(LqrTreeListsModel data, int level) {
     List<Widget> lists = [];
     if (data.children == null || data.enabled) {
-      IconData icon = widget.isMultiple && data.isSelect || _checkedDatas.length > 0 && data.value == _checkedDatas[0].value ? LqrIconType.radioOn : LqrIconType.radioOff;
+      bool _isSelect = widget.isMultiple && data.isSelect || _checkedDatas.length > 0 && data.value == _checkedDatas[0].value;
+      IconData icon = _isSelect ? LqrIconType.radioOn : LqrIconType.radioOff;
       lists.add(GestureDetector(
         onTap: () => onTap(data, true),
-        child: LqrIcon(icon: icon, size: 30),
+        child: LqrIcon(icon: icon, size: 30, color: _isSelect ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
       ));
     }
     if (data.children != null) {
-      IconData icon = data.isUnfold ? LqrIconType.arrowUp : LqrIconType.arrowDown;
+      lists.add(Container(width: Lqr().width(30)));
+      IconData icon = data.isUnfold ? LqrIconType.arrowDown : LqrIconType.arrowRight;
       lists.add(LqrIcon(icon: icon, size: 30));
     }
-    return Container(
-      width: Lqr().width(90),
-      child: Row(children: lists, mainAxisAlignment: MainAxisAlignment.spaceBetween),
-    );
+    return Row(children: lists, mainAxisAlignment: MainAxisAlignment.end);
   }
-
-  /// [过滤]
-  // bool filter(LqrTreeListsModel data) {
-  //   if (widget.filter == null)
-  //     return true;
-  //   else
-  //     return widget.filter(data);
-  // }
 
   /// [点击]
   void onTap(LqrTreeListsModel data, type) {

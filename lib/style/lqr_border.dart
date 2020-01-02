@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 11:47:03
+ * @LastEditTime: 2019-12-25 17:37:07
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -77,5 +77,5 @@ class LqrBorder {
   static interval({double height, Color color}) => Container(height: Lqr.ui.height(height ?? 13), color: color ?? Lqr.ui.backgroundColor);
 
   /// [线]
-  static divider() => Divider(height: Lqr.ui.width(1), color: ui.color1, thickness: 0.9);
+  static divider({Color color}) => Divider(height: Lqr.ui.width(1), color: color ?? ui.color1, thickness: 0.9);
 }

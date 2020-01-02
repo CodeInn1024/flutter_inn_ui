@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 08:26:46
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-05 11:18:40
+ * @LastEditTime: 2019-12-25 12:35:04
 */
 
 import 'package:flutter_lqrui/flutter_lqrui.dart';
@@ -16,19 +16,30 @@ class LqrAppBarTheme {
   final Gradient gradient;
   final Color textColor;
 
+  /// [状态栏图标和字体颜色]
+  final Brightness brightness;
+
   const LqrAppBarTheme({
     this.backgroundColor = Colors.white,
     this.gradient,
     this.textColor = LqrText.color2,
+    this.brightness = Brightness.dark,
   });
 }
 
 class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
+
+  /// [主题]
   final LqrAppBarTheme theme;
+
+  /// [左边小部件]
   final Widget leading;
+
+  /// [标题]
   final String title;
-  final Widget middle;
+
+  /// [右边小部件]
   final List<Widget> actions;
 
   LqrAppBar({
@@ -36,7 +47,6 @@ class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.automaticallyImplyLeading = true,
     this.leading,
     this.title = "",
-    this.middle,
     this.actions,
     theme,
   })  : theme = theme ?? LqrAppBarTheme.ui,
@@ -51,7 +61,9 @@ class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
     final bool canPop = parentRoute?.canPop ?? false;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return AppBar(
+      brightness: theme.brightness,
       title: Text(title, style: TextStyle(color: theme.textColor, fontSize: Lqr.ui.size(36), fontWeight: FontWeight.w300)),
       backgroundColor: theme.backgroundColor,
       flexibleSpace: Container(

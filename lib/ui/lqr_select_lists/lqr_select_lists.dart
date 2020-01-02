@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 14:46:49
+ * @LastEditTime: 2019-12-24 10:11:06
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -83,5 +83,5 @@ class _LqrSelectListsState extends State<LqrSelectLists> {
 class LqrSelectData {
   List<String> checkedValue = [];
   Map<String, LqrTreeListsModel> checkedDatas = {};
-  List<LqrTreeListsModel> checkedLists = [];
+  List<LqrTreeListsModel> checkedLists;
 }

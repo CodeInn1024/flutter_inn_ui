@@ -4,17 +4,27 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-18 10:10:21
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-18 10:16:55
+ * @LastEditTime: 2019-12-24 09:39:58
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
 
 class LqrNum {
-  /// [加](精确相加,防止精度丢失)
-  static String addStr(String a, String b) => (a.parseDecimal() + a.parseDecimal()).toString();
-  static Decimal add(String a, String b) => a.parseDecimal() + a.parseDecimal();
+  /// [加]
+  static String addStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() + b.parseDecimal()).toString());
 
-  /// [减](精确相减,防止精度丢失)
-  static String subtractStr(String a, String b) => (a.parseDecimal() - a.parseDecimal()).toString();
-  static Decimal subtract(String a, String b) => a.parseDecimal() - a.parseDecimal();
+  /// [加]
+  static Decimal add(List<String> lists) => lists.reduce((a, b) => addStr([a, b])).parseDecimal();
+
+  /// [减]
+  static String subtractStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() - b.parseDecimal()).toString());
+
+  /// [减]
+  static Decimal subtract(List<String> lists) => lists.reduce((a, b) => subtractStr([a, b])).parseDecimal();
+
+  /// [乘]
+  static String multiplyStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() * b.parseDecimal()).toString());
+
+  /// [乘]
+  static Decimal multiply(List<String> lists) => lists.reduce((a, b) => multiplyStr([a, b])).parseDecimal();
 }

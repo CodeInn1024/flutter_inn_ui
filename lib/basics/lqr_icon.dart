@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
- * @LastEditors: hwd
- * @LastEditTime: 2019-12-10 15:10:07
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2019-12-25 16:35:17
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -23,7 +23,7 @@ class LqrIcon extends StatelessWidget {
     this.size = 25,
     Color color,
     this.fontFamily,
-  })  : color = color ?? Lqr.ui.primaryColor,
+  })  : color = color ?? Lqr.ui.iconColor,
         super(key: key);
 
   @override
@@ -56,4 +56,13 @@ class LqrIconType {
 
   /// [箭头下]
   static IconData arrowDown = IconData(0xe65a, fontFamily: 'LqrIcon');
+
+  /// [箭头右]
+  static IconData arrowRight = IconData(0xe65b, fontFamily: 'LqrIcon');
+
+  /// [下拉]
+  static IconData caretBottom = IconData(0xe77a, fontFamily: 'LqrIcon');
+
+  /// [关闭]
+  static IconData close = IconData(0xe613, fontFamily: 'LqrIcon');
 }

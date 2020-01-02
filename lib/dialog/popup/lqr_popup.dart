@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: hwd
  * @Date: 2019-12-12 11:38:09
- * @LastEditors: hwd
- * @LastEditTime: 2019-12-17 08:32:02
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2019-12-24 09:44:10
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -60,12 +60,12 @@ void openPopup({
 
             // 启动 /关闭定时器
             if (duration != null) {
-              !isTime
-                  ? startCountdownTimer()
-                  : () {
-                      _timer?.cancel();
-                      _timer = null;
-                    };
+              if (!isTime) {
+                startCountdownTimer();
+              } else {
+                _timer?.cancel();
+                _timer = null;
+              }
             }
             return GestureDetector(
               onTap: () => closePopup ? Navigator.of(buildContext).pop() : {},

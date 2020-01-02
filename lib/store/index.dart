@@ -14,7 +14,7 @@ class Store {
   }
 
   static T value<T>(context, {scope}) {
-    return Provider.of<T>(context);
+    return Provider.of<T>(context, listen: false);
   }
 
   static connect<T>({builder, child, scope}) {

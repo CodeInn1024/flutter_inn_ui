@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-10-28 08:51:12
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-16 10:17:00
+ * @LastEditTime: 2019-12-25 16:58:28
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -30,6 +30,9 @@ class LqrRouter {
 
   /// [返回]
   static pop([data = ""]) => navKey.currentState.pop(data);
+
+  /// [销毁当前页面并跳转新页面]
+  static removeRoute(LqrRouterClass router) => navKey.currentState.removeRoute(animationType(router));
 }
 
 Route<dynamic> animationType(LqrRouterClass router) {
