@@ -16,7 +16,7 @@ import 'package:lqrui/pages/basics/basics_notify.dart';
 class FeedbackRoute {
   static String path = "/feedback";
 
-  static LqrRouterClass popup() => LqrRouterClass(widget: BasicsPopup(), title: "弹出层", path: "$path/popup");
-  static LqrRouterClass dialog() => LqrRouterClass(widget: BasicsDialog(), title: "Dialog弹出框", path: "$path/dialog");
-  static LqrRouterClass notify() => LqrRouterClass(widget: BasicsNotify(), title: "Dialog弹出框", path: "$path/notify");
+  static InnRouterClass popup() => InnRouterClass(widget: BasicsPopup(), title: "弹出层", path: "$path/popup");
+  static InnRouterClass dialog() => InnRouterClass(widget: BasicsDialog(), title: "Dialog弹出框", path: "$path/dialog");
+  static InnRouterClass notify() => InnRouterClass(widget: BasicsNotify(), title: "Dialog弹出框", path: "$path/notify");
 }

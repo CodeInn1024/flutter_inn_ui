@@ -4,7 +4,7 @@
  * @Autor: lqrui
  * @Date: 2019-12-03 11:19:57
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-05 17:00:15
+ * @LastEditTime: 2020-01-07 15:24:16
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -54,15 +54,15 @@ class LqrText {
   static double size40 = Lqr.ui.size(sizeR40);
 
 // +++++++++++++++++++++字体颜色+++++++++++++++++++++
-  /// 主要文字 Primary 0xFF303133
-  static const Color color1 = Color(0xFF303133);
+  /// 主要文字 Primary
+  static const Color color1 = Color(0xFF2b2f33);
 
-  /// 常规文字 Regular 0xFF606266
-  static const Color color2 = Color(0xFF606266);
+  /// 常规文字 Regular
+  static const Color color2 = Color(0xFF5b5e66);
 
-  /// 次要文字 Secondary 0xFF909399
-  static const Color color3 = Color(0xFF909399);
+  /// 次要文字 Secondary
+  static const Color color3 = Color(0xFF818d99);
 
-  /// 占位文字 Placeholder 0xFFC0C4CC
-  static const Color color4 = Color(0xFFC0C4CC);
+  /// 占位文字 Placeholder
+  static const Color color4 = Color(0xFFcccccc);
 }

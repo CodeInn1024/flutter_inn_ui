@@ -62,7 +62,7 @@
       itemCount: lists.length,
       itemBuilder: (BuildContext context, int i) {
         return LqrCard(
-          onTap: () => lqrRouter(Routes.clientDetail(lists[i].id)),
+          onTap: () => InnRouter(Routes.clientDetail(lists[i].id)),
           margin: Lqr.ui.edgeT(Lqr.ui.edgeBa),
           hearder: Text(lists[i].meterName, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: Lqr.ui.size(28))),
           content: Column(

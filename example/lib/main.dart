@@ -4,13 +4,11 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 11:40:15
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-02 17:44:34
+ * @LastEditTime: 2020-01-07 16:30:37
 */
 
 import './common/common.dart';
 import './config/index.dart';
-import './splash_page.dart';
-import './pages/user/user_login.dart';
 import './pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -24,15 +22,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xfff0f2f5),
       ),
-      navigatorKey: LqrRouter.navKey,
+      navigatorKey: InnRouter.navKey,
+      onGenerateRoute: InnRouter.onGenerateRoute,
       home: LqrBackDesktop(
         builder: (scaffoldCtx) {
           // [设置全局路由默认过度动画]
-          LqrRouter.transition = LqrRouterTransition.cupertino;
-          Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx, primaryColor: LqrColor.red)..init(scaffoldCtx);
+          InnRouter.transition = InnRouterTransition.cupertino;
+          Lqr.ui = Lqr(designWidth: Config.screenWidth, designHeight: Config.screenHeight, scaffoldCtx: scaffoldCtx, primaryColor: LqrColor.pink)..init(scaffoldCtx);
           LqrAppBarTheme.ui = LqrAppBarTheme(gradient: LqrGradient.linear45(LqrColor.redG), textColor: Colors.white);
           LqrButtonTheme.ui = LqrButtonTheme(type: LqrButtonType.redGradient);
-          // return Store.value<IndexStore>(context).showSplash ? SplashPage() : Store.value<IndexStore>(context).token == '0' ? UserLogin() : HomePage();
           return HomePage();
         },
       ),

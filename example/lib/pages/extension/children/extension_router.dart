@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-11 15:00:49
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-16 10:18:26
+ * @LastEditTime: 2020-01-07 16:02:17
 */
 
 import 'package:lqrui/common/common.dart';
@@ -28,9 +28,9 @@ class ExtensionRouter extends StatelessWidget {
         ),
         itemCount: routers.length,
         itemBuilder: (BuildContext context, int i) {
-          LqrRouterClass v = routers[i];
+          InnRouterClass v = routers[i];
           return GestureDetector(
-            onTap: () => LqrRouter.push(v),
+            onTap: () => InnRouter.push(v),
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -38,10 +38,10 @@ class ExtensionRouter extends StatelessWidget {
                 color: LqrColor.blue,
                 gradient: LqrGradient.linear45(LqrColor.redG),
               ),
-              child: DefaultTextStyle(
-                style: TextStyle(fontSize: LqrText.size32, color: Colors.white),
-                // child: Text(v.name),
-              ),
+              // child: DefaultTextStyle(
+              //   style: TextStyle(fontSize: LqrText.size32, color: Colors.white),
+              //   child: Text(v.name),
+              // ),
             ),
           );
         },
@@ -50,8 +50,8 @@ class ExtensionRouter extends StatelessWidget {
   }
 }
 
-List<LqrRouterClass> routers = [
-  // LqrRouterClass(NewPage(title: '基础用法'), name: '基础用法'),
+List<InnRouterClass> routers = [
+  // InnRouterClass(NewPage(title: '基础用法'), name: '基础用法'),
 ];
 
 class NewPage extends StatelessWidget {
@@ -68,7 +68,7 @@ class NewPage extends StatelessWidget {
           // Route<dynamic> route;
           // print( route.settings);
           // print(route.willHandlePopInternally);
-          // LqrRouter.pushAndRemoveUntil(ExtensionRouter());
+          // InnRouter.pushAndRemoveUntil(ExtensionRouter());
           // Navigator.popUntil(context, ModalRoute.withName('/screen2'));
         },
       ),

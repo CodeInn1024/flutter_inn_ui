@@ -98,7 +98,7 @@ class BasicsImage extends StatelessWidget {
                 src: "https://img3.mukewang.com/szimg/5dc9047a09bae31e12000676-360-202.png",
                 width: 100,
                 height: 100,
-                // onTap: () => LqrRouter.push(LqrRouterClass(LqrImagePreview(index: i, list: previewList))),
+                // onTap: () => InnRouter.push(InnRouterClass(LqrImagePreview(index: i, list: previewList))),
               );
             },
           ),

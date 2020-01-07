@@ -4,11 +4,12 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 08:26:46
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-02 18:08:12
+ * @LastEditTime: 2020-01-07 16:02:29
 */
 
 import 'package:lqrui/common/common.dart';
 
+import 'package:lqrui/pages/basics/basics_input.dart';
 import 'package:lqrui/pages/basics/basics_button.dart';
 import 'package:lqrui/pages/basics/basics_radio.dart';
 import 'package:lqrui/pages/basics/basics_image.dart';
@@ -22,14 +23,15 @@ import 'package:lqrui/pages/basics/basics_text.dart';
 
 class BasicsRoute {
   static String path = "/basics";
-  static LqrRouterClass button() => LqrRouterClass(widget: BasicsButton(), title: "按钮", path: "$path/button");
-  static LqrRouterClass radio() => LqrRouterClass(widget: BasicsRadio(), title: "单选框", path: "$path/radio");
-  static LqrRouterClass image() => LqrRouterClass(widget: BasicsImage(), title: "图片", path: "$path/image");
-  static LqrRouterClass icon() => LqrRouterClass(widget: BasicsIcon(), title: "图标", path: "$path/icon");
-  static LqrRouterClass inputNumber() => LqrRouterClass(widget: BasicsInputNumber(), title: "计数器", path: "$path/inputNumber");
-  static LqrRouterClass checkbox() => LqrRouterClass(widget: BasicsCheckbox(), title: "多选框", path: "$path/checkbox");
-  static LqrRouterClass collapse() => LqrRouterClass(widget: BasicsCollapse(), title: "折叠面板", path: "$path/collapse");
-  static LqrRouterClass color() => LqrRouterClass(widget: BasicsColor(), title: "颜色", path: "$path/color");
-  static LqrRouterClass border() => LqrRouterClass(widget: BasicsBorder(), title: "边框", path: "$path/border");
-  static LqrRouterClass text() => LqrRouterClass(widget: BasicsText(), title: "文字", path: "$path/text");
+  static InnRouterClass input() => InnRouterClass(widget: BasicsInput(), title: "输入框", path: "$path/input");
+  static InnRouterClass button() => InnRouterClass(widget: BasicsButton(), title: "按钮", path: "$path/button");
+  static InnRouterClass radio() => InnRouterClass(widget: BasicsRadio(), title: "单选框", path: "$path/radio");
+  static InnRouterClass image() => InnRouterClass(widget: BasicsImage(), title: "图片", path: "$path/image");
+  static InnRouterClass icon() => InnRouterClass(widget: BasicsIcon(), title: "图标", path: "$path/icon");
+  static InnRouterClass inputNumber() => InnRouterClass(widget: BasicsInputNumber(), title: "计数器", path: "$path/inputNumber");
+  static InnRouterClass checkbox() => InnRouterClass(widget: BasicsCheckbox(), title: "多选框", path: "$path/checkbox");
+  static InnRouterClass collapse() => InnRouterClass(widget: BasicsCollapse(), title: "折叠面板", path: "$path/collapse");
+  static InnRouterClass color() => InnRouterClass(widget: BasicsColor(), title: "颜色", path: "$path/color");
+  static InnRouterClass border() => InnRouterClass(widget: BasicsBorder(), title: "边框", path: "$path/border");
+  static InnRouterClass text() => InnRouterClass(widget: BasicsText(), title: "文字", path: "$path/text");
 }

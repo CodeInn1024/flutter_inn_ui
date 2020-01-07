@@ -4,13 +4,14 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 16:46:37
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-02 18:07:18
+ * @LastEditTime: 2020-01-07 16:11:56
 */
 
 import 'package:lqrui/common/common.dart';
 
 /// [基础组件]
-List<LqrRouterClass> basicsLists = [
+List<InnRouterClass> basicsLists = [
+  BasicsRoute.input(),
   BasicsRoute.color(),
   BasicsRoute.border(),
   BasicsRoute.text(),
@@ -24,7 +25,7 @@ List<LqrRouterClass> basicsLists = [
 ];
 
 /// [反馈组件]
-List<LqrRouterClass> feedback = [
+List<InnRouterClass> feedback = [
   FeedbackRoute.popup(),
   FeedbackRoute.dialog(),
   FeedbackRoute.notify(),
@@ -110,7 +111,7 @@ class Component extends StatelessWidget {
                                   children: v.childrenList
                                       .map(
                                         (v) => InkWell(
-                                          onTap: () => LqrRouter.push(v),
+                                          onTap: () => InnRouter.push(v),
                                           child: Container(
                                             color: Colors.white,
                                             padding: LqrEdge.edgeH(top: 20, bottom: 20, left: 32, right: 32),
@@ -140,6 +141,6 @@ class Component extends StatelessWidget {
 class HomeClass {
   final String name;
   final LqrIcon icon;
-  final List<LqrRouterClass> childrenList;
+  final List<InnRouterClass> childrenList;
   HomeClass({this.name, this.icon, this.childrenList});
 }

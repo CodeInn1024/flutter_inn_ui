@@ -11,7 +11,7 @@ import 'package:lqrui/common/common.dart';
 class Extension extends StatelessWidget {
   Extension({Key key}) : super(key: key);
 
-  final List<LqrRouterClass> lists = [
+  final List<InnRouterClass> lists = [
     ExtensionRoute.lineText,
     ExtensionRoute.refres,
     ExtensionRoute.router,
@@ -30,8 +30,8 @@ class Extension extends StatelessWidget {
             onTap: () {
               // Navigator.pushNamed(context, '/extensionLineText',ExtensionLineText(id));
               // APPRoute.pushExtensionLineText("13213132");
-              // lqrRouter132(lists[i].router);
-              LqrRouter.push(lists[i]);
+              // InnRouter132(lists[i].router);
+              InnRouter.push(lists[i]);
             },
             margin: LqrEdge.edgeT(),
             background: LqrColor.blue,

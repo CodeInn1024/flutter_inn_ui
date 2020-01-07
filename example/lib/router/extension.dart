@@ -15,7 +15,7 @@ import 'package:lqrui/pages/extension/children/extension_router.dart';
 
 class ExtensionRoute {
   static String path = "/extension";
-  static LqrRouterClass get lineText => LqrRouterClass(widget: ExtensionLineText(), title: "横排多组排列", path: "$path/lineText");
-  static LqrRouterClass get refres => LqrRouterClass(widget: ExtensionRefresh(), title: "上拉加载下拉刷新", path: "$path/refres");
-  static LqrRouterClass get router => LqrRouterClass(widget: ExtensionRouter(), title: "路由", path: "$path/router");
+  static InnRouterClass get lineText => InnRouterClass(widget: ExtensionLineText(), title: "横排多组排列", path: "$path/lineText");
+  static InnRouterClass get refres => InnRouterClass(widget: ExtensionRefresh(), title: "上拉加载下拉刷新", path: "$path/refres");
+  static InnRouterClass get router => InnRouterClass(widget: ExtensionRouter(), title: "路由", path: "$path/router");
 }

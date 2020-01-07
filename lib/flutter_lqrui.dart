@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-25 11:29:41
+ * @LastEditTime: 2020-01-07 16:27:10
 */
 
 import './lqr_common.dart';
@@ -14,7 +14,7 @@ class Lqr {
   static Lqr ui = new Lqr();
 
   /// [scaffold context]
-  final BuildContext scaffoldCtx;
+  BuildContext scaffoldCtx;
 
   /// [设计宽度]
   final double designWidth;
@@ -61,12 +61,12 @@ class Lqr {
   /// [时间格式]
   final String format;
 
-  const Lqr({
+  Lqr({
     this.scaffoldCtx,
     this.designWidth = 750,
     this.designHeight = 1334,
-    this.primaryColor = LqrColor.blue,
-    this.backgroundColor = const Color(0xffeff0f2),
+    this.primaryColor = LqrColor.orange,
+    this.backgroundColor = const Color(0xFFF5F5F9),
     this.successColor = const Color(0xFF67C23A),
     this.warningColor = const Color(0xFFE6A23C),
     this.dangerColor = const Color(0xFFF56C6C),

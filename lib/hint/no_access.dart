@@ -37,7 +37,7 @@ class _NoAccessState extends State<NoAccess> {
                 textAlign: TextAlign.center,
               ),
             ),
-            // Lqr.ui.button('马上绑定', width: 250, ontap: () => lqrRouter(context, Routes.companySearch())),
+            // Lqr.ui.button('马上绑定', width: 250, ontap: () => InnRouter(context, Routes.companySearch())),
           ],
         ),
       ),

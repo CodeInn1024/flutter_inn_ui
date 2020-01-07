@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-11-21 11:48:54
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-02 18:04:00
+ * @LastEditTime: 2020-01-07 15:08:48
 */
 
 export 'dart:async';
@@ -31,6 +31,7 @@ export 'package:photo_view/photo_view_gallery.dart';
 export 'package:dio/dio.dart' show MultipartFile, FormData;
 export 'package:multi_image_picker/multi_image_picker.dart';
 export 'package:package_info/package_info.dart';
+export 'package:inn_router/inn_router.dart';
 
 // widget
 export './ui/lqr_select_style/lqr_select_style.dart';
@@ -49,7 +50,6 @@ export './hint/lqr_nodata.dart';
 
 // provider
 export './store/index.dart';
-export './router/common.dart';
 
 export './basics/common.dart';
 export './untils/common.dart';
