@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 11:40:00
+ * @LastEditTime: 2020-01-17 17:38:25
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -22,7 +22,7 @@ class LqrFutureBuilder extends StatelessWidget {
       case ConnectionState.waiting:
         return LqrFutureBuilderWaiting();
       default:
-        if (snapshot.hasError && !snapshot.data) {
+        if (snapshot.hasError && snapshot.data == null) {
           return LqrError(errorText: snapshot.error);
         } else {
           return content();

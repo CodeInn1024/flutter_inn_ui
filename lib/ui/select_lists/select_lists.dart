@@ -4,20 +4,31 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-24 10:11:06
+ * @LastEditTime: 2020-01-14 11:17:17
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
 
-class LqrSelectLists extends StatefulWidget {
+class ISelectLists extends StatefulWidget {
+  /// [数据]
   final List<LqrTreeListsModel> lists;
-  final Widget Function(LqrTreeListsModel data, bool isSelect) content;
-  final bool Function(LqrTreeListsModel data) filter; // 过滤
-  final bool isMultiple; // 是否可多选
-  final LqrSelectData selectData; // 选中的数据
-  final Function(LqrSelectData) onChanged;
 
-  const LqrSelectLists({
+  /// [视图]
+  final Widget Function(LqrTreeListsModel data, bool isSelect) content;
+
+  /// [过滤]
+  final bool Function(LqrTreeListsModel data) filter;
+
+  /// [是否可多选]
+  final bool isMultiple;
+
+  /// [选中的数据]
+  final ISelectData selectData;
+
+  /// [改变事件]
+  final Function(ISelectData) onChanged;
+
+  const ISelectLists({
     Key key,
     this.lists,
     this.content,
@@ -27,16 +38,20 @@ class LqrSelectLists extends StatefulWidget {
     this.onChanged,
   }) : super(key: key);
   @override
-  _LqrSelectListsState createState() => _LqrSelectListsState();
+  _ISelectListsState createState() => _ISelectListsState();
 }
 
-class _LqrSelectListsState extends State<LqrSelectLists> {
+class _ISelectListsState extends State<ISelectLists> {
   Map<String, LqrTreeListsModel> _checkedDatas = {};
 
   @override
   void initState() {
     super.initState();
-    _checkedDatas = widget.selectData.checkedDatas ?? {};
+    if (widget.selectData?.checkedDatas != null) {
+      _checkedDatas = widget.selectData.checkedDatas.map((String key, LqrTreeListsModel value) {
+        return MapEntry(key, value);
+      });
+    }
   }
 
   @override
@@ -50,6 +65,7 @@ class _LqrSelectListsState extends State<LqrSelectLists> {
 
   Widget page(LqrTreeListsModel data) {
     bool isSelect = _checkedDatas.containsKey(data.value);
+    print(_checkedDatas.length);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -57,7 +73,7 @@ class _LqrSelectListsState extends State<LqrSelectLists> {
           isSelect && widget.isMultiple ? _checkedDatas.remove(data.value) : _checkedDatas[data.value] = data;
         });
         if (widget.onChanged != null) {
-          LqrSelectData a = LqrSelectData();
+          ISelectData a = ISelectData();
           a.checkedDatas = _checkedDatas;
           a.checkedValue = _checkedDatas.keys.toList();
           a.checkedLists = _checkedDatas.values.toList();
@@ -66,11 +82,11 @@ class _LqrSelectListsState extends State<LqrSelectLists> {
       },
       child: widget.content == null
           ? LqrCard(
-              margin: LqrEdge.edgeB(),
+              margin: LqrEdge.bottom(),
               content: Row(
                 children: <Widget>[
-                  LqrIcon(code: isSelect ? 0xe61f : 0xe660),
-                  Container(width: Lqr.ui.width(LqrEdge().size)),
+                  IIcon(isSelect ? IIcons.radioOn : IIcons.radioOff),
+                  Container(width: Lqr.ui.width(Lqr().edgeInsets)),
                   Expanded(child: Text(data.name)),
                 ],
               ),
@@ -80,8 +96,13 @@ class _LqrSelectListsState extends State<LqrSelectLists> {
   }
 }
 
-class LqrSelectData {
+class ISelectData {
+  /// [选中的value]
   List<String> checkedValue = [];
+
+  /// [内部数据]
   Map<String, LqrTreeListsModel> checkedDatas = {};
+
+  /// 不能设置为空数组
   List<LqrTreeListsModel> checkedLists;
 }

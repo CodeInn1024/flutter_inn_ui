@@ -30,13 +30,13 @@ class LqrCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: margin,
-        decoration: BoxDecoration(borderRadius: LqrBorder.radius(), color: Colors.white, boxShadow: LqrShadow.boxShadow),
+        decoration: BoxDecoration(borderRadius: IRadius.radius(), color: Colors.white, boxShadow: LqrShadow.boxShadow),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            hearder != null ? Container(height: Lqr.ui.width(hearderHeight), padding: LqrEdge.edgeLR(), child: hearder, alignment: Alignment.centerLeft) : Container(),
-            hearder != null && content != null ? LqrBorder.divider() : Container(),
-            content != null ? Container(padding: LqrEdge.edgeA(), child: content) : Container(),
+            hearder != null ? Container(height: Lqr.ui.width(hearderHeight), padding: LqrEdge.lr(), child: hearder, alignment: Alignment.centerLeft) : Container(),
+            hearder != null && content != null ? IBorder.divider() : Container(),
+            content != null ? Container(padding: LqrEdge.all(), child: content) : Container(),
           ],
         ),
       ),

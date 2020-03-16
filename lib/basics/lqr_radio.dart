@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 09:11:56
- * @LastEditors: hwd
- * @LastEditTime: 2019-12-11 17:39:34
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2020-01-15 16:57:44
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -33,7 +33,6 @@ class LqrRadio extends StatefulWidget {
   /// List<LqrRadioClass> 数据
   final List<LqrRadioClass> groupValue;
 
-  
   /// 圆角
   final double radio;
 
@@ -46,9 +45,8 @@ class LqrRadio extends StatefulWidget {
     this.onChanged,
     this.builder,
     this.radio = 20,
-    @required this.groupValue,
-  })  : assert(groupValue != null && groupValue.length > 0, groupValueStr),
-        super(key: key);
+    this.groupValue = const [],
+  }) : super(key: key);
 
   @override
   _LqrRadioState createState() => _LqrRadioState();
@@ -60,18 +58,18 @@ class _LqrRadioState extends State<LqrRadio> {
   @override
   void initState() {
     super.initState();
-    _value = widget.value ?? widget.groupValue[0].value;
+    if (widget.groupValue.isNotEmpty) _value = widget.value ?? widget.groupValue[0].value;
   }
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: LqrBorder.radius(size: widget.radio),
+      borderRadius: IRadius.radius(widget.radio),
       child: Container(
         decoration: widget.type == LqrRadioType.button
             ? BoxDecoration(
-                border: LqrBorder.borderA(1, color: Colors.black),
-                borderRadius: LqrBorder.radius(),
+                border: IBorder.all(1),
+                borderRadius: IRadius.radius(),
               )
             : null,
         child: Wrap(
@@ -110,7 +108,7 @@ class _LqrRadioState extends State<LqrRadio> {
   Widget basics(context, data, active) => Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          LqrIcon(icon: active ? LqrIconType.radioOn : LqrIconType.radioOff),
+          IIcon(active ? IIcons.radioOn : IIcons.radioOff),
           Container(width: Lqr.ui.width(15)),
           Text(data.name),
         ],
@@ -120,9 +118,9 @@ class _LqrRadioState extends State<LqrRadio> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            padding: LqrEdge.edgeH(lr: 20, tb: 10),
+            padding: LqrEdge.custom(lr: 20, tb: 10),
             color: active ? Lqr.ui.primaryColor : Colors.white,
-            child: Text(data.name, style: TextStyle(fontSize: LqrText.size26, color: active ? Colors.white : Colors.black)),
+            child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(26), color: active ? Colors.white : Colors.black)),
           ),
         ],
       );
@@ -147,7 +145,7 @@ class LqrRadioOn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LqrIcon(icon: LqrIconType.radioOn, size: 28);
+    return IIcon(IIcons.radioOn, size: 28);
   }
 }
 
@@ -157,6 +155,6 @@ class LqrRadioOff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LqrIcon(icon: LqrIconType.radioOff, size: 28);
+    return IIcon(IIcons.radioOff, size: 28);
   }
 }

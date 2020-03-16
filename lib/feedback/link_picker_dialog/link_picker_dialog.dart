@@ -61,9 +61,9 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
             GestureDetector(
               onTap: () {},
               child: Container(
-                padding: LqrEdge.edgeA(),
+                padding: LqrEdge.all(),
                 width: LqrUntils.screenWidth,
-                decoration: BoxDecoration(color: Colors.white, borderRadius: LqrBorder.radiusT(size: 20)),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: IRadius.top()),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -88,7 +88,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
                                         });
                                       },
                                       child: Container(
-                                        margin: LqrEdge.edgeR(),
+                                        margin: LqrEdge.right(),
                                         decoration: BoxDecoration(
                                           border: Border(bottom: BorderSide(width: Lqr.ui.width(2), color: tabKey == i ? Colors.red : Colors.white)),
                                         ),
@@ -125,7 +125,7 @@ class _LinkPickerDialogState extends State<LinkPickerDialog> with AutomaticKeepA
                             child: Text(
                               selectLists[i].name,
                               style: TextStyle(
-                                color: i == selectIndex[tabKey] ? Colors.red : LqrText.color3,
+                                color: i == selectIndex[tabKey] ? Colors.red : IText.color3,
                                 height: Lqr.ui.height(4),
                                 fontSize: Lqr.ui.size(28),
                               ),

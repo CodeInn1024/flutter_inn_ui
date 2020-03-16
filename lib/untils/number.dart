@@ -11,20 +11,20 @@ import 'package:flutter_lqrui/lqr_common.dart';
 
 class LqrNum {
   /// [加]
-  static String addStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() + b.parseDecimal()).toString());
+  static String addStr(List<String> lists) => lists.reduce((a, b) => (a.toDecimal() + b.toDecimal()).toString());
 
   /// [加]
-  static Decimal add(List<String> lists) => lists.reduce((a, b) => addStr([a, b])).parseDecimal();
+  static Decimal add(List<String> lists) => lists.reduce((a, b) => addStr([a, b])).toDecimal();
 
   /// [减]
-  static String subtractStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() - b.parseDecimal()).toString());
+  static String subtractStr(List<String> lists) => lists.reduce((a, b) => (a.toDecimal() - b.toDecimal()).toString());
 
   /// [减]
-  static Decimal subtract(List<String> lists) => lists.reduce((a, b) => subtractStr([a, b])).parseDecimal();
+  static Decimal subtract(List<String> lists) => lists.reduce((a, b) => subtractStr([a, b])).toDecimal();
 
   /// [乘]
-  static String multiplyStr(List<String> lists) => lists.reduce((a, b) => (a.parseDecimal() * b.parseDecimal()).toString());
+  static String multiplyStr(List<String> lists) => lists.reduce((a, b) => (a.toDecimal() * b.toDecimal()).toString());
 
   /// [乘]
-  static Decimal multiply(List<String> lists) => lists.reduce((a, b) => multiplyStr([a, b])).parseDecimal();
+  static Decimal multiply(List<String> lists) => lists.reduce((a, b) => multiplyStr([a, b])).toDecimal();
 }

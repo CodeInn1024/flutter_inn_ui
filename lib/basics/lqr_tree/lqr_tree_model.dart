@@ -7,7 +7,7 @@
  * @LastEditTime: 2019-12-20 16:24:15
 */
 
-class LqrTreeModel {
+class LqrTreeModel<T> {
   List<LqrTreeListsModel> lists = [];
 
   LqrTreeModel({this.lists});

@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-31 15:55:05
+ * @LastEditTime: 2020-01-15 17:01:19
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -48,22 +48,22 @@ class _LqrSelectStyleState extends State<LqrSelectStyle> {
         widget.leading == null
             ? Container()
             : Container(
-                margin: LqrEdge.edgeR(),
-                child: Text(widget.leading, style: TextStyle(color: LqrText.color3, fontSize: Lqr.ui.size(28))),
+                margin: LqrEdge.right(),
+                child: Text(widget.leading, style: IText.style3(28)),
               ),
         Expanded(
           child: GestureDetector(
             onTap: widget.onTap,
             child: Container(
               height: Lqr.ui.width(60),
-              padding: LqrEdge.edgeH(size: 10, left: 15, right: 15),
-              decoration: BoxDecoration(borderRadius: LqrBorder.radius(), border: LqrBorder.borderA(1)),
+              padding: LqrEdge.custom(size: 10, left: 15, right: 15),
+              decoration: BoxDecoration(borderRadius: IRadius.radius(), border: IBorder.all(2)),
               child: Row(
                 children: <Widget>[
                   Expanded(
                     child: DefaultTextStyle(
-                      style: TextStyle(fontSize: Lqr.ui.size(26), color: LqrText.color2),
-                      child: widget.content ?? widget.value == '' ? Text(widget.hintText, style: TextStyle(color: LqrText.color4)) : Text(widget.value),
+                      style: IText.style2(26),
+                      child: widget.content ?? widget.value == '' ? Text(widget.hintText, style: TextStyle(color: IText.color4)) : Text(widget.value),
                     ),
                   ),
                   widget.clean == null
@@ -71,9 +71,9 @@ class _LqrSelectStyleState extends State<LqrSelectStyle> {
                       : GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: widget.clean,
-                          child: Container(padding: LqrEdge.edgeLR(), child: LqrIcon(icon: LqrIconType.close)),
+                          child: Container(padding: LqrEdge.lr(), child: IIcon(IIcons.close)),
                         ),
-                  LqrIcon(icon: LqrIconType.caretBottom),
+                  IIcon(IIcons.caretBottom),
                 ],
               ),
             ),

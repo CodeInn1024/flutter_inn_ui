@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-03 12:06:48
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-04 16:03:07
+ * @LastEditTime: 2020-01-09 17:02:12
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -30,13 +30,11 @@ class LqrBackDesktop extends StatelessWidget {
         }
         return false;
       },
-      child: Scaffold(
-        body: Builder(
-          builder: (BuildContext scaffoldCtx) {
-            MediaQuery.of(scaffoldCtx);
-            return builder(scaffoldCtx);
-          },
-        ),
+      child: Builder(
+        builder: (BuildContext scaffoldCtx) {
+          MediaQuery.of(scaffoldCtx);
+          return builder(scaffoldCtx);
+        },
       ),
     );
   }

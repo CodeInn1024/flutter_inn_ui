@@ -4,7 +4,7 @@
  * @Autor: hwd
  * @Date: 2019-12-10 14:39:45
  * @LastEditors: hwd
- * @LastEditTime: 2019-12-11 17:09:50
+ * @LastEditTime: 2020-02-03 15:08:17
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -42,6 +42,8 @@ class LqrCollapse extends StatefulWidget {
   /// [右侧按钮自定义(context, active)]
   final Widget Function(BuildContext context, bool active) rightBuilder;
 
+  /// [默认是否展开]
+  final bool isOpen;
   LqrCollapse({
     Key key,
     this.marginLR = 20,
@@ -55,8 +57,9 @@ class LqrCollapse extends StatefulWidget {
     this.childrenAlignment = CrossAxisAlignment.start,
     this.height = 88,
     Widget rightBuilder,
+    this.isOpen = false,
   })  : leftWidget = leftWidget ?? Container(),
-        titleStyle = titleStyle ?? TextStyle(fontSize: LqrText.size28),
+        titleStyle = titleStyle ?? TextStyle(fontSize: Lqr.ui.size(28)),
         rightBuilder = rightBuilder ?? btns,
         super(key: key);
 
@@ -68,12 +71,13 @@ class _LqrCollapseState extends State<LqrCollapse> with SingleTickerProviderStat
   static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
   AnimationController _controller;
   Animation<double> _heightFactor;
-  bool _childrenShow = false;
+  bool _childrenShow;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    _childrenShow = widget.isOpen;
     _heightFactor = _controller.drive(_easeInTween);
   }
 
@@ -111,9 +115,9 @@ class _LqrCollapseState extends State<LqrCollapse> with SingleTickerProviderStat
               borderRadius: BorderRadius.circular(Lqr.ui.width(0)),
               child: GestureDetector(
                 child: Container(
-                  margin: LqrEdge.edgeL(size: widget.marginLR),
+                  margin: LqrEdge.left(widget.marginLR),
                   height: Lqr.ui.width(widget.height),
-                  decoration: BoxDecoration(border: LqrBorder.border(bottom: 1)),
+                  decoration: BoxDecoration(border: IBorder.bottom(2)),
                   child: Row(
                     children: <Widget>[
                       widget.leftWidget,
@@ -126,7 +130,7 @@ class _LqrCollapseState extends State<LqrCollapse> with SingleTickerProviderStat
                             ),
                       ),
                       Container(
-                        margin: LqrEdge.edgeR(size: widget.marginLR),
+                        margin: LqrEdge.right(widget.marginLR),
                         child: widget.rightBuilder(context, _childrenShow),
                       ),
                     ],
@@ -136,26 +140,26 @@ class _LqrCollapseState extends State<LqrCollapse> with SingleTickerProviderStat
             ),
           ),
           builder(),
-          LqrBorder.divider(),
+          IBorder.divider(),
         ],
       ),
     );
   }
 
   Widget builder() {
-    final bool closed = !_childrenShow && _controller.isDismissed;
+    final bool closed = !_childrenShow;
     return AnimatedBuilder(
       animation: _heightFactor,
       builder: (BuildContext context, Widget child) {
         return ClipRect(
           child: Align(
-            heightFactor: _heightFactor.value,
+            heightFactor: closed ? _heightFactor.value : 1.0,
             child: widget.children ??
                 Container(
-                  padding: LqrEdge.edgeA(size: 30),
+                  padding: LqrEdge.all(30),
                   child: Text(
                     widget.childrenText,
-                    style: TextStyle(color: LqrText.color3),
+                    style: IText.style3(28),
                   ),
                 ),
           ),
@@ -166,7 +170,7 @@ class _LqrCollapseState extends State<LqrCollapse> with SingleTickerProviderStat
   }
 }
 
-Widget btns(context, active) => active ? LqrIcon(icon: LqrIconType.arrowUp) : LqrIcon(icon: LqrIconType.arrowDown);
+Widget btns(context, active) => active ? IIcon(IIcons.arrowUp) : IIcon(IIcons.arrowDown);
 
 class ChildrenDataClass {
   final String name;

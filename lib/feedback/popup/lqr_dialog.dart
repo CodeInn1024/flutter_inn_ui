@@ -3,8 +3,8 @@
  * @Version: 2.0
  * @Autor: hwd
  * @Date: 2019-12-13 15:54:01
- * @LastEditors: hwd
- * @LastEditTime: 2019-12-17 08:40:08
+ * @LastEditors: lqrui.cn
+ * @LastEditTime: 2020-01-16 18:08:04
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -41,10 +41,11 @@ class LqrDialog {
     bool showConfirmButton = true,
     bool showCancelButton = false,
     Function confirmFun,
+    bool loading = false,
   }) {
     return openPopup(
       container: ClipRRect(
-        borderRadius: LqrBorder.radius(size: radios),
+        borderRadius: IRadius.radius(radios),
         child: Container(
           width: Lqr.ui.width(width),
           color: Colors.white,
@@ -52,19 +53,21 @@ class LqrDialog {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              titleWidget != null ? titleWidget : title != null
-                  ? Container(
-                      padding: LqrEdge.edgeH(lr: 20, top: 20),
-                      child: Text(title, style: TextStyle(fontSize: Lqr.ui.size(36))),
-                    )
-                  : Container(),
-              messageWidget ?? Container(padding: LqrEdge.edgeH(lr: 20, top: 20), child: Text(message)),
+              titleWidget != null
+                  ? titleWidget
+                  : title != null
+                      ? Padding(
+                          padding: LqrEdge.custom(lr: 20, top: 20),
+                          child: Text(title, style: TextStyle(fontSize: Lqr.ui.size(36))),
+                        )
+                      : SizedBox(),
+              messageWidget ?? Container(padding: LqrEdge.custom(lr: 20, top: 20), child: Text(message)),
               Container(
-                width: Lqr.ui.width(0.1),
+                width: LqrUntils.screenWidth,
                 height: Lqr.ui.width(80),
                 alignment: Alignment.center,
-                margin: LqrEdge.edgeT(),
-                decoration: BoxDecoration(border: LqrBorder.border(top: 1)),
+                margin: LqrEdge.top(),
+                decoration: BoxDecoration(border: IBorder.top(2)),
                 child: Row(
                   children: <Widget>[
                     showCancelButton
@@ -72,33 +75,31 @@ class LqrDialog {
                             child: Material(
                             color: Colors.white,
                             child: InkWell(
-                              onTap: () => Navigator.of(Lqr.ui.scaffoldCtx).pop(),
+                              onTap: () => IRouter.pop(true),
                               child: Container(
                                 height: Lqr().width(80),
+                                decoration: BoxDecoration(border: IBorder.right(2)),
                                 alignment: Alignment.center,
                                 child: Text('取消'),
                               ),
                             ),
                           ))
-                        : Container(),
+                        : SizedBox(),
                     showConfirmButton
                         ? Expanded(
                             child: Material(
                               color: Colors.white,
                               child: InkWell(
-                                onTap: confirmFun ?? () => Navigator.of(Lqr.ui.scaffoldCtx).pop(),
+                                onTap: confirmFun ?? () => IRouter.pop(true),
                                 child: Container(
                                   height: Lqr().width(80),
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    '确认',
-                                    style: TextStyle(color: Color(0xFF1989fa)),
-                                  ),
+                                  child: Text(loading ? "加载中。。。":'确认', style: TextStyle(color: Color(0xFF1989fa))),
                                 ),
                               ),
                             ),
                           )
-                        : Container(),
+                        : SizedBox(),
                   ],
                 ),
               ),
@@ -129,7 +130,7 @@ class LqrDialog {
     return openPopup(
       container: Container(
         width: Lqr().width(0.1),
-        padding: LqrEdge.edgeA(),
+        padding: LqrEdge.all(),
         color: backgroundColor,
         child: child ?? Text(message, style: TextStyle(color: Colors.white), textAlign: TextAlign.center),
       ),

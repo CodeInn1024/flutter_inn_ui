@@ -26,8 +26,8 @@ class LqrTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: LqrEdge.edgeH(size: 10, top: 5, bottom: 5),
-      decoration: BoxDecoration(color: background ?? Color(type['background']), borderRadius: LqrBorder.radius()),
+      padding: LqrEdge.custom(size: 10, top: 5, bottom: 5),
+      decoration: BoxDecoration(color: background ?? Color(type['background']), borderRadius: IRadius.radius()),
       child: Text(value, style: TextStyle(color: textC ?? Color(type['textC']), fontSize: Lqr.ui.size(24))),
     );
   }

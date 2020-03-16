@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 14:47:25
+ * @LastEditTime: 2020-01-15 17:01:32
 */
 
 import 'package:flutter_lqrui/flutter_lqrui.dart';
@@ -35,15 +35,15 @@ class LqrTimeLine extends StatelessWidget {
                 child: Text("", style: TextStyle(fontSize: Lqr.ui.size(12), color: Colors.white)),
               ),
             ),
-            Expanded(child: Container(margin: LqrEdge.edgeL(size: 10), child: title)),
+            Expanded(child: Container(margin: LqrEdge.left(10), child: title)),
           ],
         ),
         Container(
           width: LqrUntils.screenWidth,
-          padding: LqrEdge.edgeH(size: 20, left: 30),
-          margin: LqrEdge.edgeLR(size: 7),
+          padding: LqrEdge.custom(size: 20, left: 30),
+          margin: LqrEdge.lr(7),
           decoration: BoxDecoration(
-            border: LqrBorder.border(left: 1),
+            border: IBorder.left(2),
           ),
           child: Container(child: content),
         ),

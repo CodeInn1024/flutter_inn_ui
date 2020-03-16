@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-05 16:20:55
+ * @LastEditTime: 2020-01-14 16:09:19
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -21,25 +21,14 @@ class _TimeOutState extends State<TimeOut> {
     return Scaffold(
       appBar: AppBar(title: Text('超时')),
       body: Container(
-        height:  LqrUntils.screenWidth - 80,
+        height: LqrUntils.screenWidth - 80,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                IconData(0xe62c, fontFamily: 'IconFont'),
-                color: LqrText.color2,
-                size: Lqr.ui.size(80),
-              ),
-              Text(
-                '\n\n请求超时',
-                style:
-                    TextStyle(color: LqrText.color2, fontSize: Lqr.ui.size(18)),
-              ),
-              Text(
-                '\n\n${widget.params['text'] ?? ''}',
-                style: TextStyle(color: LqrText.color2),
-              ),
+              Icon(IconData(0xe62c, fontFamily: 'IconFont'), color: IText.color2, size: 80),
+              Text('\n\n请求超时', style: IText.style2(18)),
+              Text('\n\n${widget.params['text'] ?? ''}', style: IText.style2(18)),
             ],
           ),
         ),

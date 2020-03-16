@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 16:34:22
+ * @LastEditTime: 2020-01-14 16:07:58
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 
@@ -25,12 +25,12 @@ class LqrError extends StatelessWidget {
           direction: Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            LqrIcon(icon: LqrIconType.nodata, size: 160, color: LqrText.color3),
+            IIcon(IIcons.nodata, size: 160, color: IText.color3),
             Container(
-              padding: LqrEdge.edgeT(size: 30),
+              padding: LqrEdge.top(30),
               child: Text(
                 errorText,
-                style: TextStyle(color: LqrText.color3, fontSize: Lqr.ui.size(28)),
+                style: IText.style3(28),
                 textAlign: TextAlign.center,
               ),
             )

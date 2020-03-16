@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-10 14:39:43
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-06 15:27:17
+ * @LastEditTime: 2020-01-15 17:01:47
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -14,7 +14,7 @@ TextEditingController _controller = TextEditingController();
 void checkApi(Map<String, LqrApiConfig> apiConfig, Function(String url) onTap) {
   showModalBottomSheet(
     context: Lqr.ui.scaffoldCtx,
-    shape: RoundedRectangleBorder(borderRadius: LqrBorder.radiusT()),
+    shape: RoundedRectangleBorder(borderRadius: IRadius.top()),
     isScrollControlled: true,
     builder: (BuildContext context) {
       double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
@@ -26,12 +26,12 @@ void checkApi(Map<String, LqrApiConfig> apiConfig, Function(String url) onTap) {
           children: [
             for (var i = 0; i < _api.length; i++) ListTile(title: Text(_api[i].name), onTap: () => onTap(_api[i].url)),
             Container(
-              padding: LqrEdge.edgeA(),
+              padding: LqrEdge.all(),
               child: Row(
                 children: <Widget>[
                   Expanded(child: LqrInput(controller: _controller, theme: LqrInputType.dark)),
                   Container(width: Lqr.ui.width(20)),
-                  LqrButton(title: '确定', size: LqrButtonSize.small, theme: LqrButtonTheme(type: LqrButtonType.primary), onTap: () => onTap(_controller.text)),
+                  IButton(title: '确定', size: IButtonSize.small, onTap: () => onTap(_controller.text)),
                 ],
               ),
             ),

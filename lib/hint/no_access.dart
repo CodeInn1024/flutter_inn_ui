@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-06 16:36:13
+ * @LastEditTime: 2020-01-14 16:08:26
 */
 import 'package:flutter/widgets.dart';
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -27,17 +27,17 @@ class _NoAccessState extends State<NoAccess> {
           direction: Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            LqrIcon(code: 0xe65f, color: LqrText.color2, size: 160),
+            IIcon(IIcons.permission, color: IText.color2, size: 160),
             Container(
-              padding: LqrEdge.edgeTB(size: 50),
-              margin: LqrEdge.edgeLR(size: 160),
+              padding: LqrEdge.bottom(50),
+              margin: LqrEdge.lr(160),
               child: Text(
                 '此功能为企业管理员专享功能，需要加入企业，并由企业管理人授权',
-                style: TextStyle(color: LqrText.color2, fontSize: Lqr.ui.size(26)),
+                style: IText.style2(26),
                 textAlign: TextAlign.center,
               ),
             ),
-            // Lqr.ui.button('马上绑定', width: 250, ontap: () => InnRouter(context, Routes.companySearch())),
+            // Lqr.ui.button('马上绑定', width: 250, ontap: () => IRouter(context, Routes.companySearch())),
           ],
         ),
       ),

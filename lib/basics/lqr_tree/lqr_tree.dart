@@ -141,13 +141,13 @@ class _LqrTreeState extends State<LqrTree> {
       children: <Widget>[
         Container(
           height: Lqr().width(widget.height),
-          padding: LqrEdge.edgeL(size: widget.padding * level),
+          padding: LqrEdge.left(widget.padding * level),
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => onTap(data, data.children == null),
             child: Row(
               children: <Widget>[
-                LqrIcon(icon: data.children == null ? LqrIconType.userSolid : LqrIconType.folderSolid, size: 30, color: level == 1 ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
+                IIcon(data.children == null ? IIcons.userSolid : IIcons.folderSolid, size: 30, color: level == 1 ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
                 Container(width: Lqr().width(30)),
                 Expanded(child: Container(child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(28))))),
                 Container(width: Lqr().width(20)),
@@ -157,7 +157,7 @@ class _LqrTreeState extends State<LqrTree> {
             ),
           ),
         ),
-        widget.showLine ? LqrBorder.divider(color: Colors.white) : Container(),
+        widget.showLine ? IBorder.divider(Colors.white) : Container(),
         // 子级显示
         data.isUnfold && data.children != null
             ? Container(
@@ -180,16 +180,16 @@ class _LqrTreeState extends State<LqrTree> {
     List<Widget> lists = [];
     if (data.children == null || data.enabled) {
       bool _isSelect = widget.isMultiple && data.isSelect || _checkedDatas.length > 0 && data.value == _checkedDatas[0].value;
-      IconData icon = _isSelect ? LqrIconType.radioOn : LqrIconType.radioOff;
+      IconData icon = _isSelect ? IIcons.radioOn : IIcons.radioOff;
       lists.add(GestureDetector(
         onTap: () => onTap(data, true),
-        child: LqrIcon(icon: icon, size: 30, color: _isSelect ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
+        child: IIcon(icon, size: 30, color: _isSelect ? Lqr.ui.primaryColor : Lqr.ui.iconColor),
       ));
     }
     if (data.children != null) {
       lists.add(Container(width: Lqr().width(30)));
-      IconData icon = data.isUnfold ? LqrIconType.arrowDown : LqrIconType.arrowRight;
-      lists.add(LqrIcon(icon: icon, size: 30));
+      IconData icon = data.isUnfold ? IIcons.arrowDown : IIcons.arrowRight;
+      lists.add(IIcon(icon, size: 30));
     }
     return Row(children: lists, mainAxisAlignment: MainAxisAlignment.end);
   }

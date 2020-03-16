@@ -82,7 +82,7 @@ class LqrInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-      style: TextStyle(color: LqrText.color2, fontSize: Lqr.ui.size(24)),
+      style: IText.style2(24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

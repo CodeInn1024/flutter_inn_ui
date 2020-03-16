@@ -14,7 +14,7 @@ MediaQueryData mediaQuery = MediaQueryData.fromWindow(window);
 
 class LqrUntils {
   /// [argb转16进制]
-  static Color argbTo16(color) => Color(int.parse(color.substring(1, 9), radix: 16) + 0xFF000000);
+  static Color argbTo16(color) => Color(int.parse(color.substring(1), radix: 16) + 0xFF000000);
 
   /// [screenUtil]
   static ScreenUtil screenUtil = ScreenUtil.getInstance();

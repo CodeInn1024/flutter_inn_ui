@@ -4,34 +4,14 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 08:26:46
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-25 12:35:04
+ * @LastEditTime: 2020-01-14 16:00:10
 */
 
 import 'package:flutter_lqrui/flutter_lqrui.dart';
 import 'package:flutter_lqrui/lqr_common.dart';
 
-class LqrAppBarTheme {
-  static LqrAppBarTheme ui = new LqrAppBarTheme();
-  final Color backgroundColor;
-  final Gradient gradient;
-  final Color textColor;
-
-  /// [状态栏图标和字体颜色]
-  final Brightness brightness;
-
-  const LqrAppBarTheme({
-    this.backgroundColor = Colors.white,
-    this.gradient,
-    this.textColor = LqrText.color2,
-    this.brightness = Brightness.dark,
-  });
-}
-
 class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
-
-  /// [主题]
-  final LqrAppBarTheme theme;
 
   /// [左边小部件]
   final Widget leading;
@@ -39,18 +19,31 @@ class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// [标题]
   final String title;
 
+  final Widget titleWidget;
+
   /// [右边小部件]
   final List<Widget> actions;
+
+  final Brightness brightness;
+
+  final Color backgroundColor;
+
+  final Color textColor;
+
+  final Gradient gradient;
 
   LqrAppBar({
     Key key,
     this.automaticallyImplyLeading = true,
     this.leading,
     this.title = "",
+    this.titleWidget,
     this.actions,
-    theme,
-  })  : theme = theme ?? LqrAppBarTheme.ui,
-        super(key: key);
+    this.brightness = Brightness.light,
+    this.backgroundColor = Colors.white,
+    this.textColor = IText.color1,
+    this.gradient,
+  }) : super(key: key);
 
   @override
   Size get preferredSize {
@@ -61,24 +54,24 @@ class LqrAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
     final bool canPop = parentRoute?.canPop ?? false;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return AppBar(
-      brightness: theme.brightness,
-      title: Text(title, style: TextStyle(color: theme.textColor, fontSize: Lqr.ui.size(36), fontWeight: FontWeight.w300)),
-      backgroundColor: theme.backgroundColor,
+      brightness: brightness,
+      title: titleWidget ?? Text(title, style: TextStyle(color: textColor, fontSize: Lqr.ui.size(36), fontWeight: FontWeight.w300)),
+      backgroundColor: backgroundColor,
       flexibleSpace: Container(
-        decoration: BoxDecoration(gradient: theme.gradient, color: theme.backgroundColor),
+        decoration: BoxDecoration(gradient: gradient, color: backgroundColor),
       ),
       elevation: 0,
-      iconTheme: IconThemeData(color: theme.textColor),
+      iconTheme: IconThemeData(color: textColor),
       centerTitle: true,
-      leading: leading ?? canPop
-          ? IconButton(
-              icon: Icon(Icons.chevron_left, color: theme.textColor),
-              iconSize: Lqr.ui.size(60),
-              onPressed: () => Navigator.pop(context ?? Lqr.ui.scaffoldCtx),
-            )
-          : Container(),
+      leading: leading ??
+          (canPop
+              ? IconButton(
+                  icon: Icon(Icons.chevron_left, color: textColor),
+                  iconSize: Lqr.ui.size(60),
+                  onPressed: () => Navigator.pop(context ?? Lqr.ui.scaffoldCtx),
+                )
+              : null),
       automaticallyImplyLeading: automaticallyImplyLeading,
       actions: actions,
     );

@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-27 17:00:09
+ * @LastEditTime: 2020-01-14 16:07:25
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -74,11 +74,11 @@ class LqrLineText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(v.title, style: lstyle ?? TextStyle(color: LqrText.color2, fontSize: Lqr.ui.size(28))),
+        Text(v.title, style: lstyle ?? IText.style2(28)),
         Text(connector),
         Expanded(
           child: DefaultTextStyle(
-            style: rstyle ?? TextStyle(color: LqrText.color3, fontSize: Lqr.ui.size(28)),
+            style: rstyle ?? IText.style3(28),
             child: Container(
               alignment: Alignment.centerLeft,
               child: v.widget ?? Text(v.value ?? '', maxLines: v.maxLines, style: TextStyle(color: v.valueColor), overflow: TextOverflow.ellipsis),

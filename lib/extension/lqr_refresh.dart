@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-27 11:23:07
+ * @LastEditTime: 2020-01-13 11:03:19
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -49,6 +49,9 @@ class LqrRefresh extends StatefulWidget {
   /// [主题]
   final LqrRefreshTheme theme;
 
+  /// [首次刷新视图]
+  final Widget firstRefreshWidget;
+
   LqrRefresh({
     Key key,
     this.child,
@@ -64,6 +67,7 @@ class LqrRefresh extends StatefulWidget {
     this.emptyWidget,
     this.slivers,
     this.theme,
+    this.firstRefreshWidget,
   }) : super(key: key);
   @override
   _LqrRefreshState createState() => _LqrRefreshState();
@@ -82,10 +86,11 @@ class _LqrRefreshState extends State<LqrRefresh> {
     return EasyRefresh.custom(
       enableControlFinishRefresh: widget.enableControlFinishRefresh,
       enableControlFinishLoad: widget.enableControlFinishLoad,
-      taskIndependence: true,
+      taskIndependence: false,
       controller: widget.loadingController,
       firstRefresh: widget.firstRefresh,
       topBouncing: widget.topBouncing,
+      firstRefreshWidget: widget.firstRefreshWidget,
       emptyWidget: _loadIndex == 0 && widget.list.length == 0 ? widget.emptyWidget : null,
       header: ClassicalHeader(
         refreshText: "下拉刷新",

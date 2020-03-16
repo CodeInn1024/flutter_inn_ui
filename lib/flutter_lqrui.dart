@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-07 16:27:10
+ * @LastEditTime: 2020-01-15 18:14:00
 */
 
 import './lqr_common.dart';
@@ -12,6 +12,7 @@ export './lqr_common.dart';
 
 class Lqr {
   static Lqr ui = new Lqr();
+  // static Lqr ui = new Lqr();
 
   /// [scaffold context]
   BuildContext scaffoldCtx;
@@ -43,9 +44,6 @@ class Lqr {
   /// [图标颜色] Info int
   final Color iconColor;
 
-  /// [图标]
-  final String iconFamily;
-
   /// [图片加载样式]
   final Widget imageLoading;
 
@@ -61,23 +59,30 @@ class Lqr {
   /// [时间格式]
   final String format;
 
+  /// [边距]
+  final double edgeInsets;
+
+  /// [圆角]
+  final double radius;
+
   Lqr({
     this.scaffoldCtx,
     this.designWidth = 750,
     this.designHeight = 1334,
-    this.primaryColor = LqrColor.orange,
+    this.primaryColor = const Color(0xFF0085F2),
     this.backgroundColor = const Color(0xFFF5F5F9),
     this.successColor = const Color(0xFF67C23A),
     this.warningColor = const Color(0xFFE6A23C),
     this.dangerColor = const Color(0xFFF56C6C),
     this.infoColor = const Color(0xFF909399),
     this.iconColor = const Color(0xFFC0C4CC),
-    this.iconFamily = 'IconFont',
     this.imageLoading = const LqrImageLoading(),
     this.imageError = const LqrImageError(),
     this.radioOn = const LqrRadioOn(),
     this.radioOff = const LqrRadioOff(),
     this.format = "yyyy-M-d HH:mm:ss",
+    this.edgeInsets = 20.0,
+    this.radius = 20.0,
   });
 
   void init(BuildContext context) {
@@ -85,6 +90,6 @@ class Lqr {
   }
 
   double size(double style) => ScreenUtil.getInstance().getAdapterSize(style);
-  double width(double style) => style == 0.1 ? ScreenUtil.getInstance().screenWidth : ScreenUtil.getInstance().getAdapterSize(style);
-  double height(double style) => style == 0.1 ? ScreenUtil.getInstance().screenHeight : ScreenUtil.getInstance().getAdapterSize(style);
+  double width(double style) => style == null ? null : ScreenUtil.getInstance().getAdapterSize(style);
+  double height(double style) => style == null ? null : ScreenUtil.getInstance().getAdapterSize(style);
 }

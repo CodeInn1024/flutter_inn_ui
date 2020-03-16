@@ -109,7 +109,7 @@ class LqrInput extends StatelessWidget {
     Color _textColor = textColor ?? theme.textColor;
 
     return DefaultTextStyle(
-      style: TextStyle(color: LqrText.color2, fontSize: _fontSize),
+      style: IText.style2(_fontSize),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,7 +122,7 @@ class LqrInput extends StatelessWidget {
               padding: padding,
               decoration: BoxDecoration(
                 color: _background,
-                borderRadius: _round == 0 ? null : LqrBorder.radius(size: _round),
+                borderRadius: _round == 0 ? null : IRadius.radius(_round),
                 border: border,
               ),
               child: TextField(

@@ -3,12 +3,11 @@
  * @Version: 1.0
  * @Autor: lqrui.cn
  * @Date: 2020-01-07 15:27:05
- * @LastEditors: lqrui.cn
- * @LastEditTime: 2020-01-07 18:24:24
+ * @LastEditors: hwd
+ * @LastEditTime: 2020-02-05 10:10:27
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
-import 'package:flutter/gestures.dart';
 
 class IInput extends StatefulWidget {
   /// [控制器]
@@ -32,27 +31,47 @@ class IInput extends StatefulWidget {
   /// [输入验证]
   final List<TextInputFormatter> inputFormatters;
 
-  /// [必填星号]
-  final bool mustIcon;
-
-  /// [标题]
-  final String title;
-
   /// [字体大小]
   final double fontSize;
+
+  /// [提示文字]
+  final String hintText;
+
+  /// [是否可以清除]
+  final bool isClean;
+
+  /// [是否可以隐藏内容]
+  final bool isObscure;
+
+  /// [清除回调]
+  final Function() cleanTap;
+
+  /// [居中方式]
+  final TextAlign textAlign;
+
+  /// [是否可用]
+  final bool enabled;
+
+  /// [字体颜色]
+  final Color color;
 
   const IInput({
     Key key,
     this.controller,
-    this.maxLines,
+    this.maxLines = 1,
     this.minLines,
     this.obscureText = false,
     this.onChanged,
     this.maxLength,
     this.inputFormatters,
-    this.mustIcon = false,
-    this.title,
-    this.fontSize = 16.0,
+    this.fontSize = 28,
+    this.hintText,
+    this.isClean = false,
+    this.isObscure = false,
+    this.cleanTap,
+    this.textAlign = TextAlign.start,
+    this.enabled = true,
+    this.color = IText.color2,
   }) : super(key: key);
 
   @override
@@ -60,72 +79,72 @@ class IInput extends StatefulWidget {
 }
 
 class _IInputState extends State<IInput> {
-  List<TextInputFormatter> formatters;
-  int _valueLength;
+  bool _obscureText = false;
 
   @override
   void initState() {
     super.initState();
-    formatters = widget.inputFormatters ?? <TextInputFormatter>[];
-    if (widget.maxLength != null) {
-      formatters.add(LengthLimitingTextInputFormatter(widget.maxLength));
-      _valueLength = widget.controller.text.runes.length;
-      widget.controller.addListener(() {
-        setState(() {
-          _valueLength = widget.controller.text.runes.length;
-          print(_valueLength);
-        });
-      });
-    }
+    _obscureText = widget.obscureText;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-            child: DefaultTextStyle(
-              style: TextStyle(fontSize: widget.fontSize),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  widget.mustIcon ? Text("*", style: TextStyle(color: Lqr.ui.dangerColor)) : Container(),
-                  widget.title == null ? Container() : Container(width: widget.fontSize * 6, margin: EdgeInsets.only(right: 10), child: Text(widget.title, style: TextStyle(color: LqrText.color1))),
-                  Expanded(
-                    child: EditableText(
-                      controller: widget.controller, // 控制器
-                      focusNode: FocusNode(debugLabel: "TextAffinity"),
-                      cursorColor: Lqr.ui.primaryColor, // 光标颜色
-                      style: TextStyle(color: LqrText.color2, fontSize: widget.fontSize), // 字体颜色
-                      backgroundCursorColor: Lqr.ui.primaryColor, // 渲染浮动光标时，绘制与文本对齐的背景光标时使用的颜色
-                      autocorrect: true, // 自动更正
-                      cursorOffset: Offset(0.0, 0.0), // 偏移量
-                      cursorOpacityAnimates: false, // 当光标闪烁时，光标是否从完全透明变为完全不透明
-                      cursorRadius: null, // 光标圆角
-                      cursorWidth: 2.0, // 光标厚度
-                      dragStartBehavior: DragStartBehavior.start, // 确定处理拖动开始行为的方式
-                      enableInteractiveSelection: true, // 长按将选择文本并显示剪切/复制/粘贴菜单，而点击将移动文本插入符号
-                      enableSuggestions: true, // 是否在用户键入时显示输入建议
-                      expands: true, // 填充其父级，maxLines必须为null
-                      forceLine: true, // 是否采用全宽度
-                      textWidthBasis: TextWidthBasis.longestLine,
-                      inputFormatters: formatters,
-                      maxLines: widget.maxLines,
-                      minLines: widget.minLines,
-                      obscureText: widget.obscureText,
-                      onChanged: widget.onChanged,
-                      showSelectionHandles: true,
-                      toolbarOptions: ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-                    ),
-                  ),
-                ],
-              ),
-            )),
-        widget.maxLength == null ? Container() : Text("$_valueLength/${widget.maxLength}", style: TextStyle(color: LqrText.color4, fontSize: 12.0)),
-      ],
+    return TextField(
+      scrollPadding: EdgeInsets.zero,
+      textAlignVertical: TextAlignVertical.center,
+      maxLines: widget.maxLines,
+      maxLength: widget.maxLength,
+      textAlign: widget.textAlign,
+      onChanged: widget.onChanged,
+      enabled: widget.enabled,
+      style: TextStyle(
+        textBaseline: TextBaseline.alphabetic,
+        color: widget.color,
+        fontSize: Lqr.ui.size(widget.fontSize),
+        fontWeight: FontWeight.w500,
+      ),
+      obscureText: _obscureText,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        contentPadding: EdgeInsets.zero,
+        isDense: true,
+        hintText: widget.hintText,
+        counterText: "",
+        hintStyle: TextStyle(
+          textBaseline: TextBaseline.alphabetic,
+          color: IText.color3,
+          fontSize: Lqr.ui.size(widget.fontSize),
+          fontWeight: FontWeight.w500,
+        ),
+        // focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 1.0, style: BorderStyle.solid, color: Lqr.ui.primaryColor)),
+        // enabledBorder: UnderlineInputBorder(borderSide: BorderSide(width: 1.0, style: BorderStyle.solid, color: LqrBorder.ui.color3)),
+        border: InputBorder.none,
+        suffix: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (widget.isObscure) ...[eye, SizedBox(width: 10)],
+            if (widget.isClean) ...[clean, SizedBox(width: 10)],
+          ],
+        ),
+      ),
     );
   }
+
+  Widget get eye => GestureDetector(
+        child: IIcon(_obscureText ? IIcons.closeEye : IIcons.openEye),
+        onTap: () {
+          setState(() {
+            _obscureText = !_obscureText;
+          });
+        },
+      );
+
+  Widget get clean => GestureDetector(
+        child: IIcon(IIcons.close),
+        onTap: () {
+          if (widget.cleanTap != null) widget.cleanTap();
+          setState(() => widget.controller.text = "");
+        },
+      );
 }

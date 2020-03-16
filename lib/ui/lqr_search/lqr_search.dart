@@ -41,7 +41,7 @@ class LqrSearch extends StatelessWidget {
             : Row(
                 children: <Widget>[
                   Container(width: Lqr.ui.width(20)),
-                  LqrButton(title: "搜索", size: LqrButtonSize.mini, onTap: onTap, theme: LqrButtonTheme(type: LqrButtonType.primary)),
+                  IButton(title: "搜索", size: IButtonSize.mini, onTap: onTap),
                 ],
               )
       ],

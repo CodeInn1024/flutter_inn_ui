@@ -1,4 +1,5 @@
 import 'package:flutter_lqrui/lqr_common.dart';
+// import 'package:path/path.dart' as path;
 
 class LqrPickerImage extends StatefulWidget {
   /// [最多选择数量]
@@ -49,10 +50,10 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
   void initState() {
     super.initState();
     _netFiles = [...widget.netFiles];
-    update();
+    _update();
   }
 
-  void update() {
+  void _update() {
     _widget = [
       for (var i = 0; i < _netFiles.length; i++)
         GestureDetector(
@@ -93,7 +94,7 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
                   widget.delFiles.add(_netFiles[index]);
                   _netFiles.removeAt(index);
                 }
-                update();
+                _update();
                 Navigator.of(context).pop(true);
               },
             ),
@@ -131,9 +132,14 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
           ByteData byteData = await requestList[i].getByteData(quality: 80);
           List<int> imageData = byteData.buffer.asUint8List();
           String fileName = "${Uuid().v1()}.png";
-          widget.addFiles.add(MapEntry(widget.uploadKey, MultipartFile.fromBytes(imageData, filename: fileName)));
+          widget.addFiles.add(
+            MapEntry(
+              widget.uploadKey,
+              MultipartFile.fromBytes(imageData, filename: fileName),
+            ),
+          );
         }
-        update();
+        _update();
       }
     } catch (e) {
       debugPrint(LqrUntils.printStr(e));
@@ -162,21 +168,21 @@ class _LqrPickerImageState extends State<LqrPickerImage> {
         ? Container()
         : Container(
             alignment: Alignment.centerLeft,
-            padding: LqrEdge.edgeA(size: 10),
+            padding: LqrEdge.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  margin: LqrEdge.edgeB(size: 10),
+                  margin: LqrEdge.bottom(10),
                   child: Text(widget.title, style: TextStyle(fontSize: Lqr.ui.size(30))),
                 ),
                 widget.hintText != null
                     ? Container(
-                        margin: LqrEdge.edgeB(size: 10),
+                        margin: LqrEdge.bottom(10),
                         child: Text(
                           "${widget.hintText}  (长按删除图片)",
-                          style: TextStyle(fontSize: Lqr.ui.size(24), color: LqrText.color2),
+                          style: IText.style2(24),
                         ),
                       )
                     : Container(),

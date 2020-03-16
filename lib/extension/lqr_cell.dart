@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 09:11:56
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-25 09:56:51
+ * @LastEditTime: 2020-01-15 17:00:08
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -35,7 +35,7 @@ class LqrCell extends StatefulWidget {
   final BorderRadiusGeometry borderRadius;
 
   /// [内边距]
-  final EdgeInsetsGeometry  padding;
+  final EdgeInsetsGeometry padding;
 
   const LqrCell({
     Key key,
@@ -45,10 +45,10 @@ class LqrCell extends StatefulWidget {
     this.onTap,
     this.margin,
     this.background = Colors.white,
-    this.titleColor = LqrText.color2,
+    this.titleColor = IText.color2,
     this.borderRadius,
     this.padding,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   _LqrCellState createState() => _LqrCellState();
@@ -65,7 +65,7 @@ class _LqrCellState extends State<LqrCell> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        padding: widget.padding ?? LqrEdge.edgeA(),
+        padding: widget.padding ?? LqrEdge.all(),
         margin: widget.margin,
         decoration: BoxDecoration(
           color: widget.background,
@@ -87,7 +87,7 @@ class LqrCellWidget {
   static Widget origin = Container(
     width: Lqr.ui.width(10),
     height: Lqr.ui.width(10),
-    margin: LqrEdge.edgeR(size: 15),
-    decoration: BoxDecoration(color: Lqr.ui.primaryColor, borderRadius: LqrBorder.radius(size: 10)),
+    margin: LqrEdge.right(15),
+    decoration: BoxDecoration(color: Lqr.ui.primaryColor, borderRadius: IRadius.radius(10)),
   );
 }

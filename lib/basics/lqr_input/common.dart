@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-17 09:47:06
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-31 17:37:11
+ * @LastEditTime: 2020-01-14 16:03:58
 */
 import 'package:flutter_lqrui/lqr_common.dart';
 export './lqr_input.dart';
@@ -12,26 +12,26 @@ export './lqr_input.dart';
 class LqrInputType {
   /// [暗色主题]]
   static const LqrInputTypeClass dark = LqrInputTypeClass(
-    textColor: LqrText.color2,
+    textColor: IText.color2,
     background: Color(0xFFefefef),
     disabledBackground: Color(0xFFffffff),
-    disabledColor: LqrText.color3,
+    disabledColor: IText.color3,
   );
 
   /// [亮色主题]
   static const LqrInputTypeClass bright = LqrInputTypeClass(
-    textColor:LqrText.color2,
+    textColor:IText.color2,
     background: Colors.white,
     disabledBackground: Color(0xFFF5F7FA),
-    disabledColor: LqrText.color4,
+    disabledColor: IText.color4,
   );
 
   /// [选择主题]
   static const LqrInputTypeClass select = LqrInputTypeClass(
-    textColor: LqrText.color2,
+    textColor: IText.color2,
     background: Colors.white,
     disabledBackground: Colors.white,
-    disabledColor: LqrText.color4,
+    disabledColor: IText.color4,
   );
 }
 

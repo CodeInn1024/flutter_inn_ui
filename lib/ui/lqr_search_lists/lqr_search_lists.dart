@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-05 11:11:07
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-16 18:41:22
+ * @LastEditTime: 2020-01-14 16:09:33
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -58,7 +58,7 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
         title: widget.title,
         actions: <Widget>[
           IconButton(
-            icon: Text(_searchShow ? '搜索' : '筛选', style: TextStyle(fontSize: Lqr.ui.size(28), color: LqrText.color2)),
+            icon: Text(_searchShow ? '搜索' : '筛选', style: IText.style2(28)),
             onPressed: () => setState(() {
               _searchShow = !_searchShow;
               if (!_searchShow) widget.loadingController.callRefresh();
@@ -83,7 +83,7 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
                         alignment: Alignment.topLeft,
                         child: Container(
                           width: LqrUntils.screenWidth,
-                          padding: LqrEdge.edgeA(),
+                          padding: LqrEdge.all(),
                           decoration: BoxDecoration(boxShadow: LqrShadow.boxShadow, color: Colors.white),
                           child: Column(
                             children: <Widget>[
@@ -93,9 +93,9 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  LqrButton(
+                                  IButton(
                                     title: "取消",
-                                    size: LqrButtonSize.small,
+                                    size: IButtonSize.small,
                                     plain: true,
                                     onTap: () {
                                       setState(() {
@@ -106,17 +106,16 @@ class _LqrSearchListsState extends State<LqrSearchLists> {
                                   Container(width: Lqr.ui.width(30)),
                                   widget.reset == null
                                       ? Container()
-                                      : LqrButton(
+                                      : IButton(
                                           title: "重置",
-                                          size: LqrButtonSize.small,
-                                          theme: LqrButtonTheme(type: LqrButtonType.danger),
+                                          size: IButtonSize.small,
+                                          type: IButtonType.danger,
                                           onTap: widget.reset,
                                         ),
                                   Container(width: Lqr.ui.width(30)),
-                                  LqrButton(
+                                  IButton(
                                     title: "搜索",
-                                    size: LqrButtonSize.small,
-                                    theme: LqrButtonTheme(type: LqrButtonType.primary),
+                                    size: IButtonSize.small,
                                     onTap: () {
                                       setState(() {
                                         _searchShow = !_searchShow;

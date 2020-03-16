@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-11-21 11:48:54
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-10 15:39:23
+ * @LastEditTime: 2020-01-14 16:08:09
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -36,8 +36,8 @@ class LqrNoData extends StatelessWidget {
         Container(height: Lqr.ui.width(top)),
         Image.asset('assets/images/no_data.png', width: Lqr.ui.width(230), fit: BoxFit.fitWidth),
         Container(height: Lqr.ui.width(20)),
-        Text(showText, style: TextStyle(color:  LqrText.color2, fontSize: Lqr.ui.size(28))),
-        onclick == null ? Container() : LqrButton(title: btnText ?? '', margin: LqrEdge.edgeT(size: 30), onTap: onclick),
+        Text(showText, style: IText.style2(28)),
+        onclick == null ? Container() : IButton(title: btnText ?? '', margin: LqrEdge.top(30), onTap: onclick),
       ],
     );
   }

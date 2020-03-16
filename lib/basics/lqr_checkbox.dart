@@ -4,7 +4,7 @@
  * @Autor: lqrui.cn
  * @Date: 2019-12-04 09:11:56
  * @LastEditors: lqrui.cn
- * @LastEditTime: 2019-12-09 09:54:34
+ * @LastEditTime: 2020-01-15 16:54:40
 */
 
 import 'package:flutter_lqrui/lqr_common.dart';
@@ -63,12 +63,12 @@ class _LqrCheckboxState extends State<LqrCheckbox> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: LqrBorder.radius(),
+      borderRadius: IRadius.radius(),
       child: Container(
         decoration: widget.type == LqrCheckboxType.button
             ? BoxDecoration(
-                border: LqrBorder.borderA(1, color: Colors.black),
-                borderRadius: LqrBorder.radius(),
+                border: IBorder.all(1),
+                borderRadius: IRadius.radius(),
               )
             : null,
         child: Wrap(
@@ -110,7 +110,7 @@ class _LqrCheckboxState extends State<LqrCheckbox> {
   Widget basics(context, data, active) => Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          LqrIcon(icon: active ? LqrIconType.radioOn : LqrIconType.radioOff),
+          IIcon(active ? IIcons.radioOn : IIcons.radioOff),
           Container(width: Lqr.ui.width(15)),
           Text(data.name),
         ],
@@ -120,9 +120,9 @@ class _LqrCheckboxState extends State<LqrCheckbox> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            padding: LqrEdge.edgeH(lr: 20, tb: 10),
+            padding: LqrEdge.custom(lr: 20, tb: 10),
             color: active ? Lqr.ui.primaryColor : Colors.white,
-            child: Text(data.name, style: TextStyle(fontSize: LqrText.size26, color: active ? Colors.white : Colors.black)),
+            child: Text(data.name, style: TextStyle(fontSize: Lqr.ui.size(26), color: active ? Colors.white : Colors.black)),
           ),
         ],
       );
@@ -147,7 +147,7 @@ class LqrCheckboxOn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LqrIcon(icon: LqrIconType.radioOn, size: 28);
+    return IIcon(IIcons.radioOn, size: 28);
   }
 }
 
@@ -157,6 +157,6 @@ class LqrCheckboxOff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LqrIcon(icon: LqrIconType.radioOff, size: 28);
+    return IIcon(IIcons.radioOff, size: 28);
   }
 }

@@ -1,22 +1,23 @@
 import 'package:flutter_lqrui/lqr_common.dart';
 
-/// kMDY = 0; // m, d, y;
-/// kHM = 1; // hh, mm;
-/// kHMS = 2; // hh, mm, ss;
-/// kHM_AP = 3; // hh, mm, ap(AM/PM);
-/// kMDYHM = 4; // m, d, y, hh, mm;
-/// kMDYHM_AP = 5; // m, d, y, hh, mm, AM/PM;
-/// kMDYHMS = 6; // m, d, y, hh, mm, ss;
-/// static const int kYMD = 7; // y, m, d;
-/// static const int kYMDHM = 8; // y, m, d, hh, mm;
-/// static const int kYMDHMS = 9; // y, m, d, hh, mm, ss;
-/// static const int kYMD_AP_HM = 10; // y, m, d, ap, hh, mm;
-/// static const int kYM = 11; // y, m;
-/// static const int kDMY = 12; // d, m, y;
-/// kYMD_AP = 13; // y, m, d, ap;
+class PickerDateClass {
+  static const int kMDY = 0;
+  static const int kHM = 1;
+  static const int kHMS = 2;
+  static const int kHM_AP = 3;
+  static const int kMDYHM = 4;
+  static const int kMDYHM_AP = 5;
+  static const int kMDYHMS = 6;
+  static const int kYMD = 7;
+  static const int kYMDHM = 8;
+  static const int kYMDHMS = 9;
+  static const int kYMD_AP_HM = 10;
+  static const int kYM = 11;
+  static const int kDMY = 12;
+}
 
-showPickerDateTime({
-  int type,
+pickerDate({
+  int type = PickerDateClass.kYMD,
   int maxMs = 0,
   int minMs,
   int valMs,
